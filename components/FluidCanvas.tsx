@@ -128,7 +128,7 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
     let s = exp(-mD * mD / (mR * mR * 0.15));
     nv += md * s * 0.8;
     let hu = 0.5 + fract(u.time * 0.12 + mD / mR * 0.3) * 0.12;
-    nd += vec4f(hsv2rgb(hu, 0.75, 1.0) * s * 3.0, s * 1.5);
+    nd += vec4f(hsv2rgb(hu, 0.9, 1.0) * s * 3.0, s * 1.5);
   }
 
   /* 5. Twelve orbiting vortices (ghost palette) */
@@ -143,7 +143,7 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
       let fa = a + 1.5708;
       nv += vec2f(cos(fa), sin(fa)) * s * 90.0;
       let hu = 0.5 + fract(f32(j) / 12.0 + u.time * 0.05) * 0.28;
-      nd += vec4f(hsv2rgb(hu, 0.75, 1.0) * s * 2.5, s * 0.8);
+      nd += vec4f(hsv2rgb(hu, 0.9, 1.0) * s * 2.5, s * 0.8);
     }
   }
 
@@ -161,7 +161,7 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
         let ba = u.time * 2.0 + f32(k) * 1.047;
         nv += vec2f(cos(ba), sin(ba)) * bs * 60.0;
         let hu = 0.5 + fract(f32(k) / 3.0 + u.time * 0.08) * 0.28;
-        nd += vec4f(hsv2rgb(hu, 0.75, 1.0) * bs * 2.0, bs);
+        nd += vec4f(hsv2rgb(hu, 0.9, 1.0) * bs * 2.0, bs);
       }
     }
   }
@@ -193,8 +193,22 @@ struct VertexOutput {
 @group(0) @binding(0) var<uniform> ru: RenderUniforms;
 @group(0) @binding(1) var<storage, read> dyeBuf: array<vec4f>;
 
-fn s(x: i32, y: i32) -> vec4f {
+fn texel(x: i32, y: i32) -> vec4f {
   return dyeBuf[u32(clamp(y, 0, i32(ru.height) - 1)) * u32(ru.width) + u32(clamp(x, 0, i32(ru.width) - 1))];
+}
+
+/* Bilinear interpolation for smooth upscaling from 256x256 grid */
+fn sampleBilinear(uv: vec2f) -> vec4f {
+  let p = uv * vec2f(ru.width, ru.height) - 0.5;
+  let ix = i32(floor(p.x));
+  let iy = i32(floor(p.y));
+  let fx = fract(p.x);
+  let fy = fract(p.y);
+  let a = texel(ix, iy);
+  let b = texel(ix + 1, iy);
+  let c = texel(ix, iy + 1);
+  let d = texel(ix + 1, iy + 1);
+  return mix(mix(a, b, fx), mix(c, d, fx), fy);
 }
 
 fn hashGrain(p: vec2f) -> f32 {
@@ -220,37 +234,38 @@ fn vert(@builtin(vertex_index) vi: u32) -> VertexOutput {
 
 @fragment
 fn frag(in: VertexOutput) -> @location(0) vec4f {
-  let px = i32(in.uv.x * ru.width);
-  let py = i32(in.uv.y * ru.height);
+  let uv = in.uv;
 
-  /* 1. 3x3 smoothing/sharpening kernel (weights sum to 1.0) */
-  var c = s(px, py).rgb * 0.40;
-  c += s(px + 1, py).rgb * 0.10;
-  c += s(px - 1, py).rgb * 0.10;
-  c += s(px, py + 1).rgb * 0.10;
-  c += s(px, py - 1).rgb * 0.10;
-  c += s(px + 1, py + 1).rgb * 0.05;
-  c += s(px + 1, py - 1).rgb * 0.05;
-  c += s(px - 1, py - 1).rgb * 0.05;
-  c += s(px - 1, py + 1).rgb * 0.05;
+  /* 1. Bilinear sample with 3x3 soft blur */
+  let tx = 1.0 / ru.width;
+  let ty = 1.0 / ru.height;
+  var c = sampleBilinear(uv).rgb * 0.40;
+  c += sampleBilinear(uv + vec2f( tx, 0.0)).rgb * 0.10;
+  c += sampleBilinear(uv + vec2f(-tx, 0.0)).rgb * 0.10;
+  c += sampleBilinear(uv + vec2f(0.0,  ty)).rgb * 0.10;
+  c += sampleBilinear(uv + vec2f(0.0, -ty)).rgb * 0.10;
+  c += sampleBilinear(uv + vec2f( tx,  ty)).rgb * 0.05;
+  c += sampleBilinear(uv + vec2f( tx, -ty)).rgb * 0.05;
+  c += sampleBilinear(uv + vec2f(-tx, -ty)).rgb * 0.05;
+  c += sampleBilinear(uv + vec2f(-tx,  ty)).rgb * 0.05;
 
   /* 2. S-curve contrast */
   c = c * 1.3;
   c = c * c * (3.0 - 2.0 * c);
 
-  /* 3. Chromatic aberration (additive) */
+  /* 3. Chromatic aberration (additive, bilinear) */
   let ca = 1.5 / ru.width;
-  let cr = s(i32(in.uv.x * ru.width + ca * ru.width), py).r * 0.15;
-  let cb = s(i32(in.uv.x * ru.width - ca * ru.width), py).b * 0.15;
+  let cr = sampleBilinear(uv + vec2f(ca, 0.0)).r * 0.15;
+  let cb = sampleBilinear(uv - vec2f(ca, 0.0)).b * 0.15;
   c.r += cr;
   c.b += cb;
 
   /* 4. Film grain */
-  let grain = (hashGrain(in.uv * 1000.0 + ru.time * 100.0) - 0.5) * 0.06;
+  let grain = (hashGrain(uv * 1000.0 + ru.time * 100.0) - 0.5) * 0.06;
   c += grain;
 
   /* 5. Vignette */
-  let d = length(in.uv - 0.5);
+  let d = length(uv - 0.5);
   let vig = smoothstep(0.85, 0.1, d);
 
   /* 6. Alpha from luminance */
