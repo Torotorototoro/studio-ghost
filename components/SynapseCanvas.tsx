@@ -257,6 +257,7 @@ function smoothNoise(x: number, y: number, t: number, phase: number): number {
 export default function SynapseCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [fallback, setFallback] = useState(false);
+  const [gpuReady, setGpuReady] = useState(false);
 
   useEffect(() => {
     if (typeof navigator === "undefined" || !navigator.gpu) {
@@ -534,6 +535,9 @@ export default function SynapseCanvas() {
 
       animId = requestAnimationFrame(loop);
 
+      /* signal ready after a few frames to let the grid fill */
+      setTimeout(() => { if (!dead) setGpuReady(true); }, 200);
+
       return () => {
         dead = true;
         cancelAnimationFrame(animId);
@@ -557,10 +561,19 @@ export default function SynapseCanvas() {
   if (fallback) return <SynapseBackground />;
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="pointer-events-none fixed inset-0"
-      style={{ width: "100vw", height: "100vh", zIndex: 1 }}
-    />
+    <>
+      {/* Canvas 2D shown instantly while WebGPU initialises */}
+      {!gpuReady && <SynapseBackground />}
+      <canvas
+        ref={canvasRef}
+        className="pointer-events-none fixed inset-0 transition-opacity duration-1000"
+        style={{
+          width: "100vw",
+          height: "100vh",
+          zIndex: 1,
+          opacity: gpuReady ? 1 : 0,
+        }}
+      />
+    </>
   );
 }
