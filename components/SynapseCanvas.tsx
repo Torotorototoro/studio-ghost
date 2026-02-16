@@ -409,15 +409,33 @@ export default function SynapseCanvas() {
           const angle = smoothNoise(n.x, n.y, t, n.phase) * Math.PI;
           n.vx += Math.cos(angle) * 0.00015;
           n.vy += Math.sin(angle) * 0.00015;
+
+          /* gentle centering force — pulls nodes toward center */
+          n.vx += (0.5 - n.x) * 0.0003;
+          n.vy += (0.5 - n.y) * 0.0003;
+
+          /* node-to-node repulsion — prevents clustering */
+          for (let j = 0; j < NUM_NODES; j++) {
+            if (i === j) continue;
+            const rx = n.x - nodes[j].x;
+            const ry = n.y - nodes[j].y;
+            const rd = rx * rx + ry * ry;
+            if (rd < 0.01 && rd > 0.0001) {
+              const rf = 0.000008 / rd;
+              n.vx += rx * rf;
+              n.vy += ry * rf;
+            }
+          }
+
           n.vx *= 0.992;
           n.vy *= 0.992;
           n.x += n.vx;
           n.y += n.vy;
 
-          if (n.x < 0.05) n.vx += 0.0005;
-          if (n.x > 0.95) n.vx -= 0.0005;
-          if (n.y < 0.05) n.vy += 0.0005;
-          if (n.y > 0.95) n.vy -= 0.0005;
+          if (n.x < 0.08) n.vx += 0.001;
+          if (n.x > 0.92) n.vx -= 0.001;
+          if (n.y < 0.08) n.vy += 0.001;
+          if (n.y > 0.92) n.vy -= 0.001;
 
           const dx = n.x - m.x;
           const dy = n.y - m.y;

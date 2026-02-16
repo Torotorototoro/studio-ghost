@@ -83,7 +83,10 @@ export default function SynapseBackground() {
       const mouse = mouseRef.current;
 
       /* ---- update nodes ---- */
-      for (const n of nodes) {
+      const cx = width * 0.5;
+      const cy = height * 0.5;
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
         const nx = n.x / maxDim;
         const ny = n.y / maxDim;
         const angle =
@@ -93,16 +96,35 @@ export default function SynapseBackground() {
           0.5;
         n.vx += Math.cos(angle) * 0.015;
         n.vy += Math.sin(angle) * 0.015;
+
+        /* gentle centering force */
+        n.vx += (cx - n.x) * 0.00015;
+        n.vy += (cy - n.y) * 0.00015;
+
+        /* node-to-node repulsion */
+        for (let j = 0; j < nodes.length; j++) {
+          if (i === j) continue;
+          const rx = n.x - nodes[j].x;
+          const ry = n.y - nodes[j].y;
+          const rd = rx * rx + ry * ry;
+          const minDist = maxDim * 0.06;
+          if (rd < minDist * minDist && rd > 1) {
+            const rf = 0.3 / Math.max(rd, 100);
+            n.vx += rx * rf;
+            n.vy += ry * rf;
+          }
+        }
+
         n.vx *= 0.985;
         n.vy *= 0.985;
         n.x += n.vx;
         n.y += n.vy;
 
-        const margin = 40;
-        if (n.x < margin) n.vx += 0.03;
-        if (n.x > width - margin) n.vx -= 0.03;
-        if (n.y < margin) n.vy += 0.03;
-        if (n.y > height - margin) n.vy -= 0.03;
+        const margin = 60;
+        if (n.x < margin) n.vx += 0.05;
+        if (n.x > width - margin) n.vx -= 0.05;
+        if (n.y < margin) n.vy += 0.05;
+        if (n.y > height - margin) n.vy -= 0.05;
 
         if (mouse.active) {
           const dx = n.x - mouse.x;
