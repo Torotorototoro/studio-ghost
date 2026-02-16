@@ -83,6 +83,16 @@ export default function RootLayout({
             75%  { border-radius: 50% 50% 40% 60% / 30% 70% 60% 40%; }
             100% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
           }
+
+          /* backdrop-filter also purged by Tailwind v4 */
+          .glass-card {
+            -webkit-backdrop-filter: blur(16px) saturate(1.3);
+            backdrop-filter: blur(16px) saturate(1.3);
+          }
+          .liquid-lens {
+            -webkit-backdrop-filter: blur(1px) saturate(1.1);
+            backdrop-filter: blur(1px) saturate(1.1);
+          }
         `}} />
       </head>
       <body
