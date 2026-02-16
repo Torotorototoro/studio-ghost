@@ -7,7 +7,6 @@ import { useEffect, useRef } from "react";
 /*  Used when WebGPU is not available.                                 */
 /* ------------------------------------------------------------------ */
 
-const NUM_NODES = 40;
 const CONN_RATIO = 0.15; // fraction of max(w,h) for connection threshold
 
 const CYAN: [number, number, number] = [0, 229, 255];
@@ -59,6 +58,10 @@ export default function SynapseBackground() {
 
     let animId: number;
     let time = 0;
+
+    /* fewer nodes on mobile for performance */
+    const isMobile = width < 768;
+    const NUM_NODES = isMobile ? 20 : 40;
 
     const cols = Math.ceil(Math.sqrt(NUM_NODES * 1.6));
     const rows = Math.ceil(NUM_NODES / cols);

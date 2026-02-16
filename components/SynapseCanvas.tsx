@@ -284,10 +284,13 @@ export default function SynapseCanvas() {
     window.addEventListener("touchmove", onTouch);
 
     /* ---- initialise nodes ---- */
+    const isMobile = window.innerWidth < 768;
+    const nodeCount = isMobile ? 20 : NUM_NODES;
+
     /* grid-jittered initial placement for even coverage */
-    const cols = Math.ceil(Math.sqrt(NUM_NODES * 1.6));
-    const rows = Math.ceil(NUM_NODES / cols);
-    const nodes: SNode[] = Array.from({ length: NUM_NODES }, (_, idx) => ({
+    const cols = Math.ceil(Math.sqrt(nodeCount * 1.6));
+    const rows = Math.ceil(nodeCount / cols);
+    const nodes: SNode[] = Array.from({ length: nodeCount }, (_, idx) => ({
       x: 0.08 + ((idx % cols) / (cols - 1)) * 0.84 + (Math.random() - 0.5) * 0.06,
       y: 0.08 + (Math.floor(idx / cols) / (rows - 1)) * 0.84 + (Math.random() - 0.5) * 0.06,
       vx: (Math.random() - 0.5) * 0.001,
@@ -407,7 +410,7 @@ export default function SynapseCanvas() {
         const s = fr % 2;
 
         /* ---- Node simulation (JS) ---- */
-        for (let i = 0; i < NUM_NODES; i++) {
+        for (let i = 0; i < nodeCount; i++) {
           const n = nodes[i];
 
           const angle = smoothNoise(n.x, n.y, t, n.phase) * Math.PI;
@@ -425,7 +428,7 @@ export default function SynapseCanvas() {
           }
 
           /* node-to-node repulsion — keeps even spacing */
-          for (let j = 0; j < NUM_NODES; j++) {
+          for (let j = 0; j < nodeCount; j++) {
             if (i === j) continue;
             const rx = n.x - nodes[j].x;
             const ry = n.y - nodes[j].y;
@@ -458,8 +461,8 @@ export default function SynapseCanvas() {
         }
 
         /* ---- Signal propagation ---- */
-        for (let i = 0; i < NUM_NODES; i++) {
-          for (let j = i + 1; j < NUM_NODES; j++) {
+        for (let i = 0; i < nodeCount; i++) {
+          for (let j = i + 1; j < nodeCount; j++) {
             const dx = nodes[i].x - nodes[j].x;
             const dy = nodes[i].y - nodes[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
@@ -475,7 +478,7 @@ export default function SynapseCanvas() {
         }
 
         /* ---- Pack node data ---- */
-        for (let i = 0; i < NUM_NODES; i++) {
+        for (let i = 0; i < nodeCount; i++) {
           nodeData[i * 4]     = nodes[i].x;
           nodeData[i * 4 + 1] = nodes[i].y;
           nodeData[i * 4 + 2] = nodes[i].activation;
@@ -484,8 +487,8 @@ export default function SynapseCanvas() {
 
         /* ---- Build connection list ---- */
         let numConns = 0;
-        for (let i = 0; i < NUM_NODES && numConns < MAX_CONNS; i++) {
-          for (let j = i + 1; j < NUM_NODES && numConns < MAX_CONNS; j++) {
+        for (let i = 0; i < nodeCount && numConns < MAX_CONNS; i++) {
+          for (let j = i + 1; j < nodeCount && numConns < MAX_CONNS; j++) {
             const dx = nodes[i].x - nodes[j].x;
             const dy = nodes[i].y - nodes[j].y;
             if (dx * dx + dy * dy < CONN_DIST * CONN_DIST) {
@@ -500,7 +503,7 @@ export default function SynapseCanvas() {
 
         /* ---- Upload to GPU ---- */
         dev.queue.writeBuffer(ub, 0, new Float32Array([
-          SIM, SIM, t, NUM_NODES,
+          SIM, SIM, t, nodeCount,
           numConns, CONN_DIST, 0, 0,
         ]));
         dev.queue.writeBuffer(nodeBuf, 0, nodeData);

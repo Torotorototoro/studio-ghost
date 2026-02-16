@@ -1,13 +1,15 @@
+import dynamic from "next/dynamic";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Services from "@/components/Services";
-import TrackRecord from "@/components/TrackRecord";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import GhostParticles from "@/components/GhostParticles";
-import NoiseOverlay from "@/components/NoiseOverlay";
 import SynapseCanvas from "@/components/SynapseCanvas";
+
+const About = dynamic(() => import("@/components/About"));
+const Services = dynamic(() => import("@/components/Services"));
+const TrackRecord = dynamic(() => import("@/components/TrackRecord"));
+const Contact = dynamic(() => import("@/components/Contact"));
+const Footer = dynamic(() => import("@/components/Footer"));
+const GhostParticles = dynamic(() => import("@/components/GhostParticles"));
+const NoiseOverlay = dynamic(() => import("@/components/NoiseOverlay"));
 
 export default function Home() {
   return (

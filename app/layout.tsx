@@ -44,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         {/* Keyframes that Tailwind v4 purges from globals.css — embedded here to bypass processing */}
         <style dangerouslySetInnerHTML={{ __html: `
           @keyframes stream-left {
