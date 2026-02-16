@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FluidBackground from "./FluidBackground";
+import FluidCanvas from "./FluidCanvas";
 import GhostStream from "./GhostStream";
 
 export default function Hero() {
@@ -19,8 +19,8 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center"
       style={{ minHeight: "max(100vh, 700px)" }}
     >
-      {/* Layer 0: Flow field particles */}
-      <FluidBackground />
+      {/* Layer 0: WebGPU fluid simulation (falls back to Canvas 2D particles) */}
+      <FluidCanvas />
 
       {/* Layer 1: Morph blobs */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
