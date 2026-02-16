@@ -26,7 +26,7 @@ export default function Contact() {
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mx-auto mb-6" />
         <p className="text-center text-white/40 mb-12 text-sm">
-          お問い合わせはこちらから。お気軽にご連絡ください。
+          まずは無料相談から。事業フェーズに合わせた最適なプランをご提案します。
         </p>
 
         <div className="glass-card p-8 sm:p-10">

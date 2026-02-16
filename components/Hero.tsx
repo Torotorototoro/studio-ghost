@@ -67,7 +67,7 @@ export default function Hero() {
             style={{ animation: "breathe 3s ease-in-out infinite" }}
           />
           <span className="text-xs tracking-widest text-white/60 uppercase font-heading">
-            Creator Business Consulting
+            AI-Powered Business Consulting
           </span>
         </div>
 
@@ -87,7 +87,7 @@ export default function Hero() {
 
         {/* Subtitle */}
         <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
-          We produce the invisible force behind creators.
+          ビジネスの立ち上げからスケールまで、一気通貫で。
         </p>
 
         {/* CTA Buttons */}

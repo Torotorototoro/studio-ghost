@@ -1,101 +1,38 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { useSectionReveal } from "./useSectionReveal";
 
-function useCounter(end: number, active: boolean, duration = 2000, decimal = false) {
-  const [value, setValue] = useState(decimal ? "0.0" : "0");
-
-  useEffect(() => {
-    if (!active) return;
-
-    const startTime = performance.now();
-
-    function step(now: number) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = eased * end;
-
-      setValue(decimal ? current.toFixed(1) : Math.floor(current).toLocaleString());
-
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        setValue(decimal ? end.toFixed(1) : end.toLocaleString());
-      }
-    }
-
-    requestAnimationFrame(step);
-  }, [active, end, duration, decimal]);
-
-  return value;
-}
-
-const STATS = [
-  { end: 120, suffix: "+", label: "Creators Supported", decimal: false },
-  { end: 3.2, prefix: "¥", suffix: "B", label: "Revenue Generated", decimal: true },
-  { end: 500, suffix: "+", label: "Projects Completed", decimal: false },
+const TESTIMONIALS = [
+  {
+    quote:
+      "STUDIO GHOSTに任せてから、自分はコンテンツ制作だけに集中できるようになった。事業の立ち上げからグッズ展開、データ分析まで全部一気通貫でやってくれる。スピード感が全然違う。",
+    name: "ホモサピ",
+    role: "YouTuber / Content Creator",
+    accent: "cyan" as const,
+  },
+  {
+    quote:
+      "少数精鋭なのにアウトプットの量と質が尋常じゃない。AIを使いこなしているからこそのスピードだと思う。何より、ブランドの世界観がブレないのが一番ありがたい。",
+    name: "K.T.",
+    role: "D2Cブランド ファウンダー",
+    accent: "purple" as const,
+  },
+  {
+    quote:
+      "他のコンサル会社だと担当者が何人も変わって話が通じなくなる。ここは最初から最後まで同じチームだから、意思決定が圧倒的に早い。",
+    name: "M.S.",
+    role: "スタートアップ CEO",
+    accent: "cyan" as const,
+  },
 ];
 
-function StatCard({
-  stat,
-  active,
-  delay,
-}: {
-  stat: (typeof STATS)[number];
-  active: boolean;
-  delay: number;
-}) {
-  const value = useCounter(stat.end, active, 2000, stat.decimal);
-
-  return (
-    <div
-      className="glass-card p-8 sm:p-10 text-center"
-      style={{
-        animation: "pulse-glow 4s ease-in-out infinite",
-        animationDelay: `${delay}s`,
-      }}
-    >
-      <div
-        className="font-bold text-white mb-3 glow-cyan"
-        style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
-      >
-        {stat.prefix || ""}
-        {active ? value : (stat.decimal ? "0.0" : "0")}
-        <span className="text-aurora">{stat.suffix}</span>
-      </div>
-      <p className="text-white/40 text-xs tracking-[0.2em] uppercase">{stat.label}</p>
-    </div>
-  );
-}
-
 export default function TrackRecord() {
-  const counterRef = useRef<HTMLElement>(null);
-  const [countersActive, setCountersActive] = useState(false);
   const { ref, style } = useSectionReveal(0.15);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setCountersActive(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (counterRef.current) observer.observe(counterRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section
       id="track-record"
-      ref={(el) => {
-        (ref as React.MutableRefObject<HTMLElement | null>).current = el;
-        counterRef.current = el;
-      }}
+      ref={ref}
       className="relative py-32 sm:py-40 px-6 section-reveal"
       style={style}
     >
@@ -104,18 +41,39 @@ export default function TrackRecord() {
         <div className="flex justify-center mb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.02]">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan" style={{ animation: "breathe 3s ease-in-out infinite" }} />
-            <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">Our impact</span>
+            <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">Results</span>
           </div>
         </div>
 
         <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4 text-center">
-          TRACK RECORD
+          RESULTS
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-cyan to-purple mx-auto mb-16" />
 
         <div className="grid md:grid-cols-3 gap-6">
-          {STATS.map((stat, i) => (
-            <StatCard key={i} stat={stat} active={countersActive} delay={i * 1.3} />
+          {TESTIMONIALS.map((t, i) => (
+            <div
+              key={i}
+              className="glass-card p-8 flex flex-col"
+              style={{
+                animation: "pulse-glow 4s ease-in-out infinite",
+                animationDelay: `${i * 1.3}s`,
+              }}
+            >
+              {/* Quote mark */}
+              <span className={`text-3xl font-heading font-bold mb-4 ${
+                t.accent === "cyan" ? "text-cyan/40" : "text-purple/40"
+              }`}>
+                &ldquo;
+              </span>
+              <p className="text-white/50 text-sm leading-relaxed flex-1 mb-6">
+                {t.quote}
+              </p>
+              <div className="border-t border-white/[0.06] pt-4">
+                <p className="text-white/80 text-sm font-semibold">{t.name}</p>
+                <p className="text-white/30 text-xs">{t.role}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

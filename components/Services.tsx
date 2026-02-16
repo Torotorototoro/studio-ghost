@@ -2,43 +2,45 @@
 
 import { useSectionReveal } from "./useSectionReveal";
 
-const SERVICES = [
+const PHASES = [
   {
+    phase: "0 → 1",
+    title: "Launch",
+    subtitle: "ビジネスの立ち上げ",
+    items: ["事業設計・ビジネスモデル構築", "ブランディング・CI策定", "MVP開発・プロトタイピング"],
+    accent: "cyan" as const,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-        <path d="M2 17l10 5 10-5" />
-        <path d="M2 12l10 5 10-5" />
+        <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+        <circle cx="12" cy="12" r="4" />
       </svg>
     ),
-    title: "Strategy & Branding",
-    description: "事業戦略の策定からブランドアイデンティティの構築まで。クリエイターの世界観を損なわず、収益化とスケールを両立する戦略を設計します。",
-    accent: "cyan" as const,
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8" />
-        <path d="M12 17v4" />
-        <path d="M7 8l3 3-3 3" />
-        <path d="M13 14h4" />
-      </svg>
-    ),
-    title: "Tech & DX",
-    description: "EC・アプリ開発、データ分析、DX推進。最新テクノロジーでクリエイターのビジネスインフラを構築し、データドリブンな意思決定を支援します。",
+    phase: "1 → 10",
+    title: "Scale",
+    subtitle: "グロースの加速",
+    items: ["マーケティング戦略・実行", "テクノロジー実装・自動化", "組織設計・チームビルディング"],
     accent: "purple" as const,
-  },
-  {
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
-        <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14" />
-        <rect x="3" y="6" width="12" height="12" rx="2" />
+        <path d="M13 7l5 5-5 5" />
+        <path d="M6 7l5 5-5 5" />
       </svg>
     ),
-    title: "Production",
-    description: "イベント企画・案件プロデュース・コンテンツ制作。クリエイターの影響力を最大化するプロジェクトを、企画から実行まで一気通貫でプロデュースします。",
+  },
+  {
+    phase: "10 → 100",
+    title: "Operate",
+    subtitle: "持続的な成長",
+    items: ["運用最適化・KPIマネジメント", "AI自動化・業務効率化", "データドリブン経営支援"],
     accent: "cyan" as const,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 6v6l4 2" />
+      </svg>
+    ),
   },
 ];
 
@@ -62,10 +64,13 @@ export default function Services() {
         <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4">
           SERVICES
         </h2>
-        <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mb-16" />
+        <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mb-6" />
+        <p className="text-white/40 text-sm mb-16 max-w-2xl">
+          ゼロからスケールまで。3フェーズの一気通貫モデルで、ビジネスのあらゆるステージを支援します。
+        </p>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {SERVICES.map((service, i) => (
+          {PHASES.map((phase, i) => (
             <div
               key={i}
               className="glass-card p-8 group"
@@ -77,21 +82,38 @@ export default function Services() {
               {/* Icon */}
               <div
                 className={`mb-6 p-3 inline-flex rounded-xl ${
-                  service.accent === "cyan"
+                  phase.accent === "cyan"
                     ? "bg-[rgba(0,229,255,0.08)] text-cyan"
                     : "bg-[rgba(180,74,255,0.08)] text-purple"
                 }`}
               >
-                {service.icon}
+                {phase.icon}
               </div>
 
-              <h3 className="font-heading text-lg font-bold text-white tracking-wide mb-3">
-                {service.title}
-              </h3>
+              {/* Phase label */}
+              <div className={`text-xs tracking-[0.15em] uppercase mb-2 font-semibold ${
+                phase.accent === "cyan" ? "text-cyan" : "text-purple"
+              }`}>
+                {phase.phase}
+              </div>
 
-              <p className="text-white/50 text-sm leading-relaxed">
-                {service.description}
+              <h3 className="font-heading text-lg font-bold text-white tracking-wide mb-1">
+                {phase.title}
+              </h3>
+              <p className="text-white/40 text-sm mb-5">
+                {phase.subtitle}
               </p>
+
+              <ul className="space-y-2">
+                {phase.items.map((item, j) => (
+                  <li key={j} className="flex items-start gap-2 text-white/50 text-sm leading-relaxed">
+                    <span className={`mt-1.5 w-1 h-1 rounded-full shrink-0 ${
+                      phase.accent === "cyan" ? "bg-cyan/60" : "bg-purple/60"
+                    }`} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
