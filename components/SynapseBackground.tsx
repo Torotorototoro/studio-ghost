@@ -60,9 +60,11 @@ export default function SynapseBackground() {
     let animId: number;
     let time = 0;
 
-    const nodes: SNode[] = Array.from({ length: NUM_NODES }, () => ({
-      x: 0.1 * width + Math.random() * 0.8 * width,
-      y: 0.1 * height + Math.random() * 0.8 * height,
+    const cols = Math.ceil(Math.sqrt(NUM_NODES * 1.6));
+    const rows = Math.ceil(NUM_NODES / cols);
+    const nodes: SNode[] = Array.from({ length: NUM_NODES }, (_, idx) => ({
+      x: width * (0.08 + ((idx % cols) / (cols - 1)) * 0.84 + (Math.random() - 0.5) * 0.06),
+      y: height * (0.08 + (Math.floor(idx / cols) / (rows - 1)) * 0.84 + (Math.random() - 0.5) * 0.06),
       vx: (Math.random() - 0.5) * 0.5,
       vy: (Math.random() - 0.5) * 0.5,
       activation: 0,
@@ -97,9 +99,16 @@ export default function SynapseBackground() {
         n.vx += Math.cos(angle) * 0.015;
         n.vy += Math.sin(angle) * 0.015;
 
-        /* centering force */
-        n.vx += (cx - n.x) * 0.0003;
-        n.vy += (cy - n.y) * 0.0003;
+        /* soft centering — only when far from center */
+        const dcx = n.x - cx;
+        const dcy = n.y - cy;
+        const cd = Math.sqrt(dcx * dcx + dcy * dcy);
+        const maxR = maxDim * 0.3;
+        if (cd > maxR) {
+          const pull = (cd - maxR) * 0.001;
+          n.vx -= (dcx / cd) * pull;
+          n.vy -= (dcy / cd) * pull;
+        }
 
         /* node-to-node repulsion */
         for (let j = 0; j < nodes.length; j++) {
@@ -107,9 +116,9 @@ export default function SynapseBackground() {
           const rx = n.x - nodes[j].x;
           const ry = n.y - nodes[j].y;
           const rd = rx * rx + ry * ry;
-          const minDist = maxDim * 0.08;
+          const minDist = maxDim * 0.1;
           if (rd < minDist * minDist && rd > 1) {
-            const rf = 0.5 / Math.max(rd, 100);
+            const rf = 0.8 / Math.max(rd, 100);
             n.vx += rx * rf;
             n.vy += ry * rf;
           }

@@ -283,9 +283,12 @@ export default function SynapseCanvas() {
     window.addEventListener("touchmove", onTouch);
 
     /* ---- initialise nodes ---- */
-    const nodes: SNode[] = Array.from({ length: NUM_NODES }, () => ({
-      x: 0.1 + Math.random() * 0.8,
-      y: 0.1 + Math.random() * 0.8,
+    /* grid-jittered initial placement for even coverage */
+    const cols = Math.ceil(Math.sqrt(NUM_NODES * 1.6));
+    const rows = Math.ceil(NUM_NODES / cols);
+    const nodes: SNode[] = Array.from({ length: NUM_NODES }, (_, idx) => ({
+      x: 0.08 + ((idx % cols) / (cols - 1)) * 0.84 + (Math.random() - 0.5) * 0.06,
+      y: 0.08 + (Math.floor(idx / cols) / (rows - 1)) * 0.84 + (Math.random() - 0.5) * 0.06,
       vx: (Math.random() - 0.5) * 0.001,
       vy: (Math.random() - 0.5) * 0.001,
       activation: 0,
@@ -410,18 +413,24 @@ export default function SynapseCanvas() {
           n.vx += Math.cos(angle) * 0.00015;
           n.vy += Math.sin(angle) * 0.00015;
 
-          /* centering force — pulls nodes toward center */
-          n.vx += (0.5 - n.x) * 0.0006;
-          n.vy += (0.5 - n.y) * 0.0006;
+          /* soft centering — only activates when far from center */
+          const cx = n.x - 0.5;
+          const cy = n.y - 0.5;
+          const cd = Math.sqrt(cx * cx + cy * cy);
+          if (cd > 0.3) {
+            const pull = (cd - 0.3) * 0.002;
+            n.vx -= cx * pull;
+            n.vy -= cy * pull;
+          }
 
-          /* node-to-node repulsion — prevents clustering */
+          /* node-to-node repulsion — keeps even spacing */
           for (let j = 0; j < NUM_NODES; j++) {
             if (i === j) continue;
             const rx = n.x - nodes[j].x;
             const ry = n.y - nodes[j].y;
             const rd = rx * rx + ry * ry;
-            if (rd < 0.02 && rd > 0.0001) {
-              const rf = 0.000015 / rd;
+            if (rd < 0.04 && rd > 0.0001) {
+              const rf = 0.00003 / rd;
               n.vx += rx * rf;
               n.vy += ry * rf;
             }
