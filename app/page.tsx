@@ -7,13 +7,13 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import GhostParticles from "@/components/GhostParticles";
 import NoiseOverlay from "@/components/NoiseOverlay";
-import FluidCanvas from "@/components/FluidCanvas";
+import SynapseCanvas from "@/components/SynapseCanvas";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-void scan-lines">
       {/* Global fixed backgrounds */}
-      <FluidCanvas />
+      <SynapseCanvas />
       <Navigation />
       <NoiseOverlay />
       <GhostParticles />
