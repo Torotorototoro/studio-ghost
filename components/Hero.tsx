@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import FluidCanvas from "./FluidCanvas";
 import GhostStream from "./GhostStream";
 
 export default function Hero() {
@@ -19,10 +18,7 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center"
       style={{ minHeight: "max(100vh, 700px)" }}
     >
-      {/* Layer 0: WebGPU fluid simulation (falls back to Canvas 2D particles) */}
-      <FluidCanvas />
-
-      {/* Layer 1: Morph blobs */}
+      {/* Layer 1: Morph blobs (hero-only decoration) */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
         <div
           className="morph-blob absolute bg-cyan"
@@ -41,19 +37,7 @@ export default function Hero() {
       {/* Layer 2: Ghost Stream (kinetic typography) */}
       <GhostStream />
 
-      {/* Layer 3: Liquid lenses */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
-        <div
-          className="liquid-lens liquid-lens--a"
-          style={{ width: 400, height: 400, top: "15%", left: "10%" }}
-        />
-        <div
-          className="liquid-lens liquid-lens--b"
-          style={{ width: 350, height: 350, bottom: "20%", right: "15%" }}
-        />
-      </div>
-
-      {/* Layer 4: Vignettes */}
+      {/* Layer 3: Vignettes */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
         <div
           className="absolute inset-0"
@@ -75,7 +59,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* Layer 5: Content with parallax */}
+      {/* Layer 4: Content with parallax */}
       <div
         className="relative z-10 text-center px-6"
         style={{ transform: `translateY(${scrollY * -0.1}px)` }}
@@ -86,7 +70,7 @@ export default function Hero() {
             className="w-2 h-2 rounded-full bg-cyan"
             style={{ animation: "breathe 3s ease-in-out infinite" }}
           />
-          <span className="text-xs tracking-widest text-white/50 uppercase font-heading">
+          <span className="text-xs tracking-widest text-white/60 uppercase font-heading">
             Creator Business Consulting
           </span>
         </div>
@@ -106,7 +90,7 @@ export default function Hero() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl text-white/40 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
           We produce the invisible force behind creators.
         </p>
 

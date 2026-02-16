@@ -12,23 +12,12 @@ export default function Contact() {
       className="relative py-32 sm:py-40 px-6 section-reveal"
       style={style}
     >
-      {/* Background blob */}
-      <div
-        className="morph-blob absolute bg-purple"
-        style={{ width: 400, height: 400, bottom: "10%", left: "10%", animationDelay: "-8s" }}
-      />
-      {/* Liquid lens */}
-      <div
-        className="liquid-lens liquid-lens--b"
-        style={{ width: 280, height: 280, bottom: "20%", right: "10%", zIndex: 0 }}
-      />
-
       <div className="relative z-10 max-w-2xl mx-auto">
         {/* Section label */}
         <div className="flex justify-center mb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.02]">
             <span className="w-1.5 h-1.5 rounded-full bg-purple" style={{ animation: "breathe 3s ease-in-out infinite" }} />
-            <span className="text-[10px] tracking-[0.2em] text-white/30 uppercase">Get in touch</span>
+            <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">Get in touch</span>
           </div>
         </div>
 
@@ -36,14 +25,14 @@ export default function Contact() {
           CONTACT
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mx-auto mb-6" />
-        <p className="text-center text-white/30 mb-12 text-sm">
+        <p className="text-center text-white/40 mb-12 text-sm">
           お問い合わせはこちらから。お気軽にご連絡ください。
         </p>
 
         <div className="glass-card p-8 sm:p-10">
           <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
             <div>
-              <label htmlFor="name" className="block text-[10px] tracking-[0.2em] text-white/30 uppercase mb-2 font-semibold">
+              <label htmlFor="name" className="block text-[10px] tracking-[0.2em] text-white/40 uppercase mb-2 font-semibold">
                 Name
               </label>
               <input
@@ -55,7 +44,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-[10px] tracking-[0.2em] text-white/30 uppercase mb-2 font-semibold">
+              <label htmlFor="email" className="block text-[10px] tracking-[0.2em] text-white/40 uppercase mb-2 font-semibold">
                 Email
               </label>
               <input
@@ -67,7 +56,7 @@ export default function Contact() {
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-[10px] tracking-[0.2em] text-white/30 uppercase mb-2 font-semibold">
+              <label htmlFor="message" className="block text-[10px] tracking-[0.2em] text-white/40 uppercase mb-2 font-semibold">
                 Message
               </label>
               <textarea

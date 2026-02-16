@@ -65,7 +65,7 @@ function StatCard({
         {active ? value : (stat.decimal ? "0.0" : "0")}
         <span className="text-aurora">{stat.suffix}</span>
       </div>
-      <p className="text-white/30 text-xs tracking-[0.2em] uppercase">{stat.label}</p>
+      <p className="text-white/40 text-xs tracking-[0.2em] uppercase">{stat.label}</p>
     </div>
   );
 }
@@ -99,23 +99,12 @@ export default function TrackRecord() {
       className="relative py-32 sm:py-40 px-6 section-reveal"
       style={style}
     >
-      {/* Background blob */}
-      <div
-        className="morph-blob absolute bg-cyan"
-        style={{ width: 450, height: 450, top: "30%", left: "50%", transform: "translateX(-50%)", animationDelay: "-12s" }}
-      />
-      {/* Liquid lens */}
-      <div
-        className="liquid-lens liquid-lens--a"
-        style={{ width: 300, height: 300, top: "20%", left: "10%", zIndex: 0 }}
-      />
-
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section label */}
         <div className="flex justify-center mb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.02]">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan" style={{ animation: "breathe 3s ease-in-out infinite" }} />
-            <span className="text-[10px] tracking-[0.2em] text-white/30 uppercase">Our impact</span>
+            <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">Our impact</span>
           </div>
         </div>
 

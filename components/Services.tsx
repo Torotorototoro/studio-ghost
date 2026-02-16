@@ -52,26 +52,11 @@ export default function Services() {
       className="relative py-32 sm:py-40 px-6 section-reveal"
       style={style}
     >
-      {/* Background blobs */}
-      <div
-        className="morph-blob absolute bg-cyan"
-        style={{ width: 450, height: 450, bottom: "5%", left: "5%", animationDelay: "-10s" }}
-      />
-      <div
-        className="morph-blob absolute bg-purple"
-        style={{ width: 350, height: 350, top: "10%", right: "10%", opacity: 0.08, animationDelay: "-3s" }}
-      />
-      {/* Liquid lens */}
-      <div
-        className="liquid-lens liquid-lens--b"
-        style={{ width: 320, height: 320, bottom: "15%", right: "5%", zIndex: 0 }}
-      />
-
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Section label */}
         <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.02]">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan" style={{ animation: "breathe 3s ease-in-out infinite" }} />
-          <span className="text-[10px] tracking-[0.2em] text-white/30 uppercase">What we do</span>
+          <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">What we do</span>
         </div>
 
         <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4">
@@ -104,7 +89,7 @@ export default function Services() {
                 {service.title}
               </h3>
 
-              <p className="text-white/40 text-sm leading-relaxed">
+              <p className="text-white/50 text-sm leading-relaxed">
                 {service.description}
               </p>
             </div>
