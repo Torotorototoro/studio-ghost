@@ -87,7 +87,7 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
     }
 
     let d = distToSeg(pos, pA, pB);
-    let lw = 1.0;
+    let lw = 1.5;
     if (d < lw * 6.0) {
       let nDist  = length(nA.xy - nB.xy);
       let cStr   = max(1.0 - nDist / u.connDist, 0.0);
@@ -113,14 +113,14 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
     let nP = n.xy * res;
     let d  = length(pos - nP);
 
-    let bR   = 2.0 + n.z * 4.0;
+    let bR   = 4.0 + n.z * 6.0;
     let core = exp(-d * d / (bR * bR));
 
-    let hR   = bR * 5.0;
-    let halo = exp(-d * d / (hR * hR)) * 0.2;
+    let hR   = bR * 7.0;
+    let halo = exp(-d * d / (hR * hR)) * 0.25;
 
     let col    = nodeColor(n.w);
-    let bright = 0.15 + n.z * 2.0;
+    let bright = 0.2 + n.z * 2.2;
     let pulse  = sin(u.time * 1.5 + n.w * 6.283 + f32(i) * 0.5) * 0.1 + 1.0;
 
     color += col * (core + halo) * bright * pulse;
@@ -410,9 +410,9 @@ export default function SynapseCanvas() {
           n.vx += Math.cos(angle) * 0.00015;
           n.vy += Math.sin(angle) * 0.00015;
 
-          /* gentle centering force — pulls nodes toward center */
-          n.vx += (0.5 - n.x) * 0.0003;
-          n.vy += (0.5 - n.y) * 0.0003;
+          /* centering force — pulls nodes toward center */
+          n.vx += (0.5 - n.x) * 0.0006;
+          n.vy += (0.5 - n.y) * 0.0006;
 
           /* node-to-node repulsion — prevents clustering */
           for (let j = 0; j < NUM_NODES; j++) {
@@ -420,8 +420,8 @@ export default function SynapseCanvas() {
             const rx = n.x - nodes[j].x;
             const ry = n.y - nodes[j].y;
             const rd = rx * rx + ry * ry;
-            if (rd < 0.01 && rd > 0.0001) {
-              const rf = 0.000008 / rd;
+            if (rd < 0.02 && rd > 0.0001) {
+              const rf = 0.000015 / rd;
               n.vx += rx * rf;
               n.vy += ry * rf;
             }

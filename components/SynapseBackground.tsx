@@ -97,9 +97,9 @@ export default function SynapseBackground() {
         n.vx += Math.cos(angle) * 0.015;
         n.vy += Math.sin(angle) * 0.015;
 
-        /* gentle centering force */
-        n.vx += (cx - n.x) * 0.00015;
-        n.vy += (cy - n.y) * 0.00015;
+        /* centering force */
+        n.vx += (cx - n.x) * 0.0003;
+        n.vy += (cy - n.y) * 0.0003;
 
         /* node-to-node repulsion */
         for (let j = 0; j < nodes.length; j++) {
@@ -107,9 +107,9 @@ export default function SynapseBackground() {
           const rx = n.x - nodes[j].x;
           const ry = n.y - nodes[j].y;
           const rd = rx * rx + ry * ry;
-          const minDist = maxDim * 0.06;
+          const minDist = maxDim * 0.08;
           if (rd < minDist * minDist && rd > 1) {
-            const rf = 0.3 / Math.max(rd, 100);
+            const rf = 0.5 / Math.max(rd, 100);
             n.vx += rx * rf;
             n.vy += ry * rf;
           }
@@ -185,10 +185,10 @@ export default function SynapseBackground() {
       /* ---- draw nodes ---- */
       for (const n of nodes) {
         const [r, g, b] = lerpColor(n.hue);
-        const radius = 1.5 + n.activation * 3;
-        const alpha = 0.2 + n.activation * 0.8;
+        const radius = 3 + n.activation * 5;
+        const alpha = 0.25 + n.activation * 0.75;
 
-        const glowR = radius * 6;
+        const glowR = radius * 8;
         const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
         grad.addColorStop(0, `rgba(${r | 0},${g | 0},${b | 0},${alpha * 0.25})`);
         grad.addColorStop(1, `rgba(${r | 0},${g | 0},${b | 0},0)`);
