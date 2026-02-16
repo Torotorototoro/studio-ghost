@@ -3,22 +3,89 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Flow Field Particle System
- * Inspired by OJPP's Living Canvas — Perlin-like noise field driving
- * hundreds of particles with trails, mouse interaction, and color palettes.
+ * #6 — Flow Field Particle System with Proper Perlin Noise
+ * Classic permutation-table Perlin noise for organic flow.
+ * 500+ particles with trails, mouse curl interaction, DPR scaling.
  */
 
-// Simple multi-octave noise (no external deps)
-function noise2D(x: number, y: number): number {
-  // Combination of sine waves at different frequencies to approximate noise
-  const n =
-    Math.sin(x * 1.2 + y * 0.9) * 0.5 +
-    Math.sin(x * 0.7 - y * 1.3) * 0.3 +
-    Math.sin(x * 2.1 + y * 1.7) * 0.15 +
-    Math.cos(x * 0.5 + y * 2.2) * 0.25 +
-    Math.sin(x * 3.1 - y * 0.4) * 0.1;
-  return n;
+// ===== Perlin Noise Implementation (no external deps) =====
+const PERM = new Uint8Array(512);
+const GRAD = [
+  [1, 1], [-1, 1], [1, -1], [-1, -1],
+  [1, 0], [-1, 0], [0, 1], [0, -1],
+];
+
+// Initialize permutation table
+(function initPerlin() {
+  const p = new Uint8Array(256);
+  for (let i = 0; i < 256; i++) p[i] = i;
+  // Fisher-Yates shuffle with fixed seed
+  let seed = 42;
+  for (let i = 255; i > 0; i--) {
+    seed = (seed * 16807 + 0) % 2147483647;
+    const j = seed % (i + 1);
+    [p[i], p[j]] = [p[j], p[i]];
+  }
+  for (let i = 0; i < 512; i++) PERM[i] = p[i & 255];
+})();
+
+function fade(t: number): number {
+  return t * t * t * (t * (t * 6 - 15) + 10);
 }
+
+function lerp(a: number, b: number, t: number): number {
+  return a + t * (b - a);
+}
+
+function dot2(g: number[], x: number, y: number): number {
+  return g[0] * x + g[1] * y;
+}
+
+function perlin2(x: number, y: number): number {
+  const xi = Math.floor(x) & 255;
+  const yi = Math.floor(y) & 255;
+  const xf = x - Math.floor(x);
+  const yf = y - Math.floor(y);
+
+  const u = fade(xf);
+  const v = fade(yf);
+
+  const aa = PERM[PERM[xi] + yi];
+  const ab = PERM[PERM[xi] + yi + 1];
+  const ba = PERM[PERM[xi + 1] + yi];
+  const bb = PERM[PERM[xi + 1] + yi + 1];
+
+  const g00 = GRAD[aa & 7];
+  const g10 = GRAD[ba & 7];
+  const g01 = GRAD[ab & 7];
+  const g11 = GRAD[bb & 7];
+
+  const n00 = dot2(g00, xf, yf);
+  const n10 = dot2(g10, xf - 1, yf);
+  const n01 = dot2(g01, xf, yf - 1);
+  const n11 = dot2(g11, xf - 1, yf - 1);
+
+  return lerp(lerp(n00, n10, u), lerp(n01, n11, u), v);
+}
+
+// Multi-octave fractal noise
+function fbm(x: number, y: number, octaves = 3): number {
+  let value = 0;
+  let amplitude = 1;
+  let frequency = 1;
+  let maxVal = 0;
+
+  for (let i = 0; i < octaves; i++) {
+    value += perlin2(x * frequency, y * frequency) * amplitude;
+    maxVal += amplitude;
+    amplitude *= 0.5;
+    frequency *= 2;
+  }
+
+  return value / maxVal;
+}
+
+// ===== Particle System =====
 
 interface Particle {
   x: number;
@@ -54,46 +121,46 @@ export default function FluidBackground() {
     let time = 0;
 
     // Ghost palette — cyan and purple hues
-    const HUES = [185, 195, 270, 280, 190, 260, 200, 175];
+    const HUES = [180, 185, 190, 195, 200, 260, 270, 280];
 
-    const PARTICLE_COUNT = Math.min(500, Math.floor((width * height) / 3000));
+    const PARTICLE_COUNT = Math.min(600, Math.floor((width * height) / 2500));
     const particles: Particle[] = [];
 
-    function createParticle(randomY = true): Particle {
+    function createParticle(): Particle {
       return {
         x: Math.random() * width,
-        y: randomY ? Math.random() * height : -5,
-        speed: 0.5 + Math.random() * 1.8,
+        y: Math.random() * height,
+        speed: 0.4 + Math.random() * 1.6,
         life: 0,
-        maxLife: 150 + Math.random() * 400,
+        maxLife: 100 + Math.random() * 500,
         hue: HUES[Math.floor(Math.random() * HUES.length)],
       };
     }
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const p = createParticle();
-      p.life = Math.floor(Math.random() * p.maxLife); // stagger
+      p.life = Math.floor(Math.random() * p.maxLife);
       particles.push(p);
     }
 
-    // Trail effect: semi-transparent background fade
+    // Trail fade: 4% opacity per frame (like OJPP)
     function fadeTrails() {
       if (!ctx) return;
       ctx.fillStyle = "rgba(2, 6, 23, 0.04)";
       ctx.fillRect(0, 0, width, height);
     }
 
-    function getFlowAngle(x: number, y: number): number {
-      const scale = 0.003;
-      const n = noise2D(x * scale + time * 0.4, y * scale + time * 0.3);
-      return n * Math.PI * 2;
+    function getFlowAngle(px: number, py: number): number {
+      const scale = 0.002;
+      const n = fbm(px * scale + time * 0.3, py * scale + time * 0.2, 3);
+      return n * Math.PI * 2.5;
     }
 
     function animate() {
       if (!ctx) return;
 
       fadeTrails();
-      time += 0.008;
+      time += 0.006;
 
       const mouse = mouseRef.current;
 
@@ -103,65 +170,66 @@ export default function FluidBackground() {
 
         if (
           p.life > p.maxLife ||
-          p.x < -20 ||
-          p.x > width + 20 ||
-          p.y < -20 ||
-          p.y > height + 20
+          p.x < -30 || p.x > width + 30 ||
+          p.y < -30 || p.y > height + 30
         ) {
-          particles[i] = createParticle(true);
+          particles[i] = createParticle();
           continue;
         }
 
-        // Flow field
         let angle = getFlowAngle(p.x, p.y);
 
         // Mouse curl influence
         if (mouse.active) {
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
           const radius = 200;
-          if (dist < radius) {
+          if (distSq < radius * radius) {
+            const dist = Math.sqrt(distSq);
             const influence = 1 - dist / radius;
             const curlAngle = Math.atan2(dy, dx) + Math.PI / 2;
             angle += (curlAngle - angle) * influence * 0.6;
+            // Also add a slight push force
+            p.x += dx * influence * 0.02;
+            p.y += dy * influence * 0.02;
           }
         }
 
         p.x += Math.cos(angle) * p.speed;
         p.y += Math.sin(angle) * p.speed;
 
-        // Fade in/out based on life
+        // Life-based alpha fade in/out
         const lifeRatio = p.life / p.maxLife;
         let alpha: number;
-        if (lifeRatio < 0.1) {
-          alpha = lifeRatio / 0.1;
-        } else if (lifeRatio > 0.8) {
-          alpha = (1 - lifeRatio) / 0.2;
+        if (lifeRatio < 0.08) {
+          alpha = lifeRatio / 0.08;
+        } else if (lifeRatio > 0.85) {
+          alpha = (1 - lifeRatio) / 0.15;
         } else {
           alpha = 1;
         }
-        alpha *= 0.6;
+        alpha *= 0.55;
 
-        const sat = 80 + Math.sin(p.life * 0.02) * 15;
-        const light = 55 + Math.sin(p.life * 0.03) * 10;
+        const sat = 75 + Math.sin(p.life * 0.02) * 20;
+        const light = 55 + Math.sin(p.life * 0.03) * 15;
 
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 1.1, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${p.hue}, ${sat}%, ${light}%, ${alpha})`;
         ctx.fill();
       }
 
-      // Draw a few bright nodes
-      if (Math.random() < 0.02) {
+      // Occasional bright intersection nodes
+      if (Math.random() < 0.015) {
         const bx = Math.random() * width;
         const by = Math.random() * height;
         const hue = HUES[Math.floor(Math.random() * HUES.length)];
-        const grad = ctx.createRadialGradient(bx, by, 0, bx, by, 40);
-        grad.addColorStop(0, `hsla(${hue}, 90%, 70%, 0.08)`);
+        const grad = ctx.createRadialGradient(bx, by, 0, bx, by, 50);
+        grad.addColorStop(0, `hsla(${hue}, 90%, 70%, 0.06)`);
         grad.addColorStop(1, `hsla(${hue}, 90%, 70%, 0)`);
         ctx.beginPath();
-        ctx.arc(bx, by, 40, 0, Math.PI * 2);
+        ctx.arc(bx, by, 50, 0, Math.PI * 2);
         ctx.fillStyle = grad;
         ctx.fill();
       }

@@ -17,6 +17,11 @@ export default function About() {
         className="morph-blob absolute bg-purple"
         style={{ width: 400, height: 400, top: "20%", right: "5%", animationDelay: "-5s" }}
       />
+      {/* Liquid lens */}
+      <div
+        className="liquid-lens liquid-lens--a"
+        style={{ width: 300, height: 300, top: "30%", right: "15%", zIndex: 0 }}
+      />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section label */}
@@ -25,15 +30,15 @@ export default function About() {
           <span className="text-[10px] tracking-[0.2em] text-white/30 uppercase">Who we are</span>
         </div>
 
-        <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4">
           ABOUT
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-cyan to-purple mb-12" />
 
-        <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/90 leading-snug mb-4">
+        <p className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-white/90 leading-snug mb-4">
           The invisible force
         </p>
-        <p className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-12">
+        <p className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-12">
           <span className="text-aurora">behind the spotlight.</span>
         </p>
 

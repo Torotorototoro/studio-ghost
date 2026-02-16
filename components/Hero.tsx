@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import FluidBackground from "./FluidBackground";
+import GhostStream from "./GhostStream";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
@@ -16,14 +16,13 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center"
       style={{ minHeight: "max(100vh, 700px)" }}
     >
       {/* Layer 0: Flow field particles */}
       <FluidBackground />
 
-      {/* Layer 1: Morph blobs for color depth — no overflow clip so blur extends naturally */}
+      {/* Layer 1: Morph blobs */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
         <div
           className="morph-blob absolute bg-cyan"
@@ -39,25 +38,44 @@ export default function Hero() {
         />
       </div>
 
-      {/* Layer 2: Vignette gradients */}
+      {/* Layer 2: Ghost Stream (kinetic typography) */}
+      <GhostStream />
+
+      {/* Layer 3: Liquid lenses */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
-        {/* Radial vignette */}
+        <div
+          className="liquid-lens liquid-lens--a"
+          style={{ width: 400, height: 400, top: "15%", left: "10%" }}
+        />
+        <div
+          className="liquid-lens liquid-lens--b"
+          style={{ width: 350, height: 350, bottom: "20%", right: "15%" }}
+        />
+      </div>
+
+      {/* Layer 4: Vignettes */}
+      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
         <div
           className="absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 30%, rgba(2,6,23,0.8) 100%)",
+            background: "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 20%, rgba(2,6,23,0.85) 100%)",
           }}
         />
-        {/* Bottom fade */}
         <div
           className="absolute bottom-0 left-0 w-full h-48"
           style={{
             background: "linear-gradient(to top, var(--sg-void), transparent)",
           }}
         />
+        <div
+          className="absolute top-0 left-0 w-full h-32"
+          style={{
+            background: "linear-gradient(to bottom, var(--sg-void), transparent)",
+          }}
+        />
       </div>
 
-      {/* Layer 3: Content with parallax */}
+      {/* Layer 5: Content with parallax */}
       <div
         className="relative z-10 text-center px-6"
         style={{ transform: `translateY(${scrollY * -0.1}px)` }}
@@ -68,24 +86,27 @@ export default function Hero() {
             className="w-2 h-2 rounded-full bg-cyan"
             style={{ animation: "breathe 3s ease-in-out infinite" }}
           />
-          <span className="text-xs tracking-widest text-white/50 uppercase">
+          <span className="text-xs tracking-widest text-white/50 uppercase font-heading">
             Creator Business Consulting
           </span>
         </div>
 
-        {/* Main title */}
-        <h1 className="font-bold tracking-tighter text-white mb-2" style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)", lineHeight: 0.95 }}>
+        {/* Main title — Outfit font + glitch */}
+        <h1
+          className="font-heading font-black tracking-tighter text-white mb-2 glitch-chromatic"
+          style={{ fontSize: "clamp(3.5rem, 12vw, 9rem)", lineHeight: 0.9 }}
+        >
           STUDIO
         </h1>
         <h1
-          className="font-bold tracking-tighter text-aurora mb-8"
-          style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)", lineHeight: 0.95 }}
+          className="font-heading font-black tracking-tighter text-aurora mb-8 glitch-text"
+          style={{ fontSize: "clamp(3.5rem, 12vw, 9rem)", lineHeight: 0.9 }}
         >
           GHOST
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg sm:text-xl text-white/50 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-white/40 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
           We produce the invisible force behind creators.
         </p>
 
@@ -102,7 +123,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3">
-        <span className="text-[10px] tracking-widest text-white/20 uppercase">Scroll</span>
+        <span className="text-[10px] tracking-widest text-white/20 uppercase font-heading">Scroll</span>
         <div
           className="w-[1px] h-10"
           style={{

@@ -17,6 +17,11 @@ export default function Contact() {
         className="morph-blob absolute bg-purple"
         style={{ width: 400, height: 400, bottom: "10%", left: "10%", animationDelay: "-8s" }}
       />
+      {/* Liquid lens */}
+      <div
+        className="liquid-lens liquid-lens--b"
+        style={{ width: 280, height: 280, bottom: "20%", right: "10%", zIndex: 0 }}
+      />
 
       <div className="relative z-10 max-w-2xl mx-auto">
         {/* Section label */}
@@ -27,7 +32,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4 text-center">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4 text-center">
           CONTACT
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mx-auto mb-6" />

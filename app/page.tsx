@@ -10,7 +10,7 @@ import NoiseOverlay from "@/components/NoiseOverlay";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-void">
+    <div className="relative min-h-screen bg-void scan-lines">
       <Navigation />
       <NoiseOverlay />
       <GhostParticles />

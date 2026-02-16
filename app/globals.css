@@ -49,6 +49,7 @@
   --color-abyss: var(--sg-abyss);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-outfit);
 }
 
 html {
@@ -58,8 +59,17 @@ html {
 body {
   background: var(--sg-void);
   color: var(--sg-text);
-  font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
+}
+
+/* ========================================
+   #1 — Dual Font System
+   Outfit: English headings (bold, geometric)
+   Zen Kaku Gothic New: Japanese body text
+   Geist: UI/labels fallback
+   ======================================== */
+.font-heading {
+  font-family: var(--font-outfit), var(--font-geist-sans), system-ui, sans-serif;
 }
 
 /* ========================================
@@ -71,7 +81,7 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #444; }
 
 /* ========================================
-   Glass Morphism
+   #7 — Glass Morphism (Enhanced)
    ======================================== */
 .glass-card {
   background: var(--sg-glass);
@@ -82,15 +92,23 @@ body {
   transition: all 0.5s var(--ease-out-expo);
   position: relative;
   overflow: hidden;
+  animation: pulse-glow 4s ease-in-out infinite;
 }
 
 .glass-card::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -1px;
   border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(0, 229, 255, 0.3), transparent 50%, rgba(180, 74, 255, 0.3));
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 229, 255, 0.4),
+    rgba(0, 229, 255, 0.05) 30%,
+    transparent 50%,
+    rgba(180, 74, 255, 0.05) 70%,
+    rgba(180, 74, 255, 0.4)
+  );
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   -webkit-mask-composite: xor;
@@ -100,11 +118,12 @@ body {
 }
 
 .glass-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 229, 255, 0.15);
+  transform: translateY(-6px);
+  border-color: rgba(0, 229, 255, 0.2);
   box-shadow:
     0 24px 80px -12px rgba(0, 0, 0, 0.6),
-    0 0 60px -20px rgba(0, 229, 255, 0.15);
+    0 0 60px -20px rgba(0, 229, 255, 0.2),
+    0 0 100px -40px rgba(180, 74, 255, 0.1);
 }
 
 .glass-card:hover::before {
@@ -160,6 +179,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 14px 32px;
+  font-family: var(--font-outfit), var(--font-geist-sans), system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.08em;
@@ -205,6 +225,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 13px 28px;
+  font-family: var(--font-outfit), var(--font-geist-sans), system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.08em;
@@ -279,6 +300,165 @@ body {
 }
 
 /* ========================================
+   #2 — Scan Lines Overlay (CRT aesthetic)
+   ======================================== */
+.scan-lines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.015) 2px,
+    rgba(0, 0, 0, 0.015) 4px
+  );
+}
+
+/* ========================================
+   #3 — Glitch Effects (4 types)
+   ======================================== */
+
+/* Type 1: Flicker — RGB split + skew */
+.glitch-text {
+  position: relative;
+  animation: glitch-flicker 3s steps(1) infinite;
+}
+
+@keyframes glitch-flicker {
+  0%, 85%, 100% {
+    text-shadow: none;
+    transform: none;
+  }
+  86% {
+    text-shadow:
+      -2px 0 rgba(0, 229, 255, 0.7),
+       2px 0 rgba(180, 74, 255, 0.7);
+    transform: skewX(-2deg);
+  }
+  87% {
+    text-shadow:
+       3px 0 rgba(0, 229, 255, 0.7),
+      -3px 0 rgba(180, 74, 255, 0.7);
+    transform: skewX(1deg);
+  }
+  88% {
+    text-shadow: none;
+    transform: none;
+  }
+  92% {
+    text-shadow:
+      -1px 0 rgba(0, 229, 255, 0.5),
+       1px 0 rgba(180, 74, 255, 0.5);
+    transform: skewX(0.5deg);
+  }
+  93% {
+    text-shadow: none;
+    transform: none;
+  }
+}
+
+/* Type 2: Chromatic aberration */
+.glitch-chromatic {
+  animation: glitch-chromatic 2.5s steps(1) infinite;
+}
+
+@keyframes glitch-chromatic {
+  0%, 90%, 100% {
+    text-shadow: none;
+  }
+  91% {
+    text-shadow:
+      -3px -1px rgba(0, 229, 255, 0.6),
+       3px 1px rgba(180, 74, 255, 0.6);
+  }
+  93% {
+    text-shadow:
+       2px -2px rgba(0, 229, 255, 0.4),
+      -2px 2px rgba(180, 74, 255, 0.4);
+  }
+  95% {
+    text-shadow: none;
+  }
+}
+
+/* Type 3: Scan line clip */
+.glitch-scan {
+  animation: glitch-scan 4s steps(1) infinite;
+}
+
+@keyframes glitch-scan {
+  0%, 88%, 100% {
+    clip-path: none;
+  }
+  89% {
+    clip-path: inset(20% 0 60% 0);
+  }
+  90% {
+    clip-path: inset(50% 0 20% 0);
+  }
+  91% {
+    clip-path: inset(10% 0 70% 0);
+  }
+  92% {
+    clip-path: none;
+  }
+}
+
+/* Type 4: Heavy — combined */
+.glitch-heavy {
+  position: relative;
+  animation: glitch-flicker 2s steps(1) infinite, glitch-chromatic 3s steps(1) infinite;
+}
+
+/* ========================================
+   #5 — Liquid Lens Distortion
+   ======================================== */
+.liquid-lens {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 229, 255, 0.03) 0%,
+    rgba(180, 74, 255, 0.02) 40%,
+    transparent 70%
+  );
+  backdrop-filter: blur(1px) saturate(1.1);
+  -webkit-backdrop-filter: blur(1px) saturate(1.1);
+  pointer-events: none;
+  will-change: transform, border-radius;
+}
+
+.liquid-lens--a {
+  animation:
+    liquid-lens-drift 14s ease-in-out infinite alternate,
+    liquid-lens-morph 9s ease-in-out infinite;
+}
+
+.liquid-lens--b {
+  animation:
+    liquid-lens-drift 18s ease-in-out infinite alternate-reverse,
+    liquid-lens-morph 11s ease-in-out infinite reverse;
+}
+
+@keyframes liquid-lens-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.05); }
+  66%  { transform: translate(-20px, 15px) scale(0.95); }
+  100% { transform: translate(10px, -10px) scale(1.02); }
+}
+
+@keyframes liquid-lens-morph {
+  0%   { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
+  25%  { border-radius: 60% 40% 30% 70% / 40% 60% 50% 50%; }
+  50%  { border-radius: 30% 70% 50% 50% / 70% 30% 40% 60%; }
+  75%  { border-radius: 50% 50% 40% 60% / 30% 70% 60% 40%; }
+  100% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
+}
+
+/* ========================================
    Section Reveal
    ======================================== */
 .section-reveal {
@@ -346,7 +526,15 @@ body {
   50%      { transform: translateY(6px); }
 }
 
-@keyframes rotate-border {
-  from { --angle: 0deg; }
-  to   { --angle: 360deg; }
+/* ========================================
+   #4 — Ghost Stream (kinetic typography)
+   ======================================== */
+@keyframes stream-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes stream-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }

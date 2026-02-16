@@ -61,6 +61,11 @@ export default function Services() {
         className="morph-blob absolute bg-purple"
         style={{ width: 350, height: 350, top: "10%", right: "10%", opacity: 0.08, animationDelay: "-3s" }}
       />
+      {/* Liquid lens */}
+      <div
+        className="liquid-lens liquid-lens--b"
+        style={{ width: 320, height: 320, bottom: "15%", right: "5%", zIndex: 0 }}
+      />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Section label */}
@@ -69,7 +74,7 @@ export default function Services() {
           <span className="text-[10px] tracking-[0.2em] text-white/30 uppercase">What we do</span>
         </div>
 
-        <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4">
           SERVICES
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mb-16" />
@@ -95,7 +100,7 @@ export default function Services() {
                 {service.icon}
               </div>
 
-              <h3 className="text-lg font-bold text-white tracking-wide mb-3">
+              <h3 className="font-heading text-lg font-bold text-white tracking-wide mb-3">
                 {service.title}
               </h3>
 

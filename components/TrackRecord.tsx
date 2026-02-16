@@ -104,6 +104,11 @@ export default function TrackRecord() {
         className="morph-blob absolute bg-cyan"
         style={{ width: 450, height: 450, top: "30%", left: "50%", transform: "translateX(-50%)", animationDelay: "-12s" }}
       />
+      {/* Liquid lens */}
+      <div
+        className="liquid-lens liquid-lens--a"
+        style={{ width: 300, height: 300, top: "20%", left: "10%", zIndex: 0 }}
+      />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section label */}
@@ -114,7 +119,7 @@ export default function TrackRecord() {
           </div>
         </div>
 
-        <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4 text-center">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4 text-center">
           TRACK RECORD
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-cyan to-purple mx-auto mb-16" />
