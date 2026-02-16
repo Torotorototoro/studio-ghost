@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import GhostStream from "./GhostStream";
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
@@ -34,10 +33,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* Layer 2: Ghost Stream (kinetic typography) */}
-      <GhostStream />
-
-      {/* Layer 3: Vignettes */}
+      {/* Layer 2: Vignettes */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
         <div
           className="absolute inset-0"
