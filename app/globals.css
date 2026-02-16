@@ -23,9 +23,9 @@
   --sg-ghost-dim: rgba(224, 231, 255, 0.06);
 
   /* Glass morphism */
-  --sg-glass: rgba(10, 15, 30, 0.6);
-  --sg-glass-border: rgba(148, 163, 184, 0.08);
-  --sg-glass-hover: rgba(0, 229, 255, 0.06);
+  --sg-glass: rgba(10, 15, 30, 0.85);
+  --sg-glass-border: rgba(148, 163, 184, 0.10);
+  --sg-glass-hover: rgba(0, 229, 255, 0.08);
 
   /* Text */
   --sg-text: #f1f5f9;
@@ -456,6 +456,13 @@ body {
   50%  { border-radius: 30% 70% 50% 50% / 70% 30% 40% 60%; }
   75%  { border-radius: 50% 50% 40% 60% / 30% 70% 60% 40%; }
   100% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
+}
+
+/* ========================================
+   Section heading legibility over fluid canvas
+   ======================================== */
+section h2 {
+  text-shadow: 0 2px 20px rgba(2, 6, 23, 0.8), 0 0 40px rgba(2, 6, 23, 0.5);
 }
 
 /* ========================================
