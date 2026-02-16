@@ -123,8 +123,10 @@ export default function GhostStream() {
               key={laneIndex}
               className="whitespace-nowrap"
               style={{
+                width: "max-content",
                 animation: `${direction} ${duration}s linear infinite`,
                 lineHeight: `${100 / LANE_COUNT}vh`,
+                willChange: "transform",
               }}
             >
               {/* Double the content for seamless loop */}
