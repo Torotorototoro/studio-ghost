@@ -5,7 +5,7 @@ export default function Footer() {
         {/* Logo */}
         <div className="font-bold flex items-baseline gap-2">
           <span className="text-2xl text-slate-400" style={{ fontFamily: "var(--font-brush)" }}>魄</span>
-          <span className="text-sm tracking-[0.2em] text-aurora">HAKU</span>
+          <span className="text-sm tracking-[0.2em] text-aurora font-heading">HAKU</span>
         </div>
 
         {/* Links */}

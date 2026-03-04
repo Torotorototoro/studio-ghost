@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ========================================
-   STUDIO GHOST — Design System
+   魄 HAKU — Design System
    Theme: "Aqua Glass" — Clarity & Trust
    ======================================== */
 
@@ -49,7 +49,7 @@
   --color-abyss: var(--sg-abyss);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-outfit);
+  --font-heading: var(--font-heading);
 }
 
 html {
@@ -63,13 +63,14 @@ body {
 }
 
 /* ========================================
-   #1 — Dual Font System
-   Outfit: English headings (bold, geometric)
-   Zen Kaku Gothic New: Japanese body text
-   Geist: UI/labels fallback
+   Font System
+   Shippori Mincho B1: Headings (明朝 — bridges brush ↔ body)
+   Zen Kaku Gothic New: Body text (ゴシック)
+   Yuji Boku: Brand mark 魄 only (毛筆)
+   Geist: UI/buttons/labels
    ======================================== */
 .font-heading {
-  font-family: var(--font-outfit), var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-heading), "Shippori Mincho B1", serif;
 }
 
 /* ========================================
@@ -178,7 +179,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 14px 32px;
-  font-family: var(--font-outfit), var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.08em;
@@ -224,7 +225,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 13px 28px;
-  font-family: var(--font-outfit), var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
   letter-spacing: 0.08em;

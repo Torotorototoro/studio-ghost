@@ -66,7 +66,7 @@ export default function Hero() {
             className="w-2 h-2 rounded-full bg-cyan"
             style={{ animation: "breathe 3s ease-in-out infinite" }}
           />
-          <span className="text-xs tracking-widest text-slate-500 uppercase font-heading">
+          <span className="text-xs tracking-widest text-slate-500 uppercase" style={{ fontFamily: "var(--font-geist-sans)" }}>
             AI-Powered Business Consulting
           </span>
         </div>
@@ -79,8 +79,8 @@ export default function Hero() {
           魄
         </h1>
         <h1
-          className="font-heading font-black tracking-[0.3em] text-aurora mb-8"
-          style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)", lineHeight: 1 }}
+          className="font-heading font-medium tracking-[0.3em] text-aurora mb-8"
+          style={{ fontSize: "clamp(1.2rem, 3vw, 2.2rem)", lineHeight: 1 }}
         >
           HAKU
         </h1>
@@ -103,7 +103,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3">
-        <span className="text-[10px] tracking-widest text-slate-300 uppercase font-heading">Scroll</span>
+        <span className="text-[10px] tracking-widest text-slate-300 uppercase" style={{ fontFamily: "var(--font-geist-sans)" }}>Scroll</span>
         <div
           className="w-[1px] h-10"
           style={{

@@ -61,7 +61,7 @@ export default function Services() {
           <span className="text-[10px] tracking-[0.2em] text-slate-400 uppercase">What we do</span>
         </div>
 
-        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-slate-800 mb-4">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-800 mb-4">
           SERVICES
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mb-6" />
@@ -93,7 +93,7 @@ export default function Services() {
                 {phase.phase}
               </div>
 
-              <h3 className="font-heading text-lg font-bold text-slate-800 tracking-wide mb-1">
+              <h3 className="font-heading text-lg font-bold text-slate-800 mb-1">
                 {phase.title}
               </h3>
               <p className="text-slate-400 text-sm mb-5">

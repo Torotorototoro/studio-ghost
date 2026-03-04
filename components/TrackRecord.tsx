@@ -45,7 +45,7 @@ export default function TrackRecord() {
           </div>
         </div>
 
-        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-slate-800 mb-4 text-center">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-800 mb-4 text-center">
           RESULTS
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-cyan to-purple mx-auto mb-16" />

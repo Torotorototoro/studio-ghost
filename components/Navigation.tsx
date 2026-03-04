@@ -32,7 +32,7 @@ export default function Navigation() {
         {/* Logo */}
         <a href="#" className="font-bold text-slate-800 group flex items-baseline gap-2">
           <span className="text-3xl" style={{ fontFamily: "var(--font-brush)" }}>魄</span>
-          <span className="text-sm tracking-[0.2em] text-aurora">HAKU</span>
+          <span className="text-sm tracking-[0.2em] text-aurora font-heading">HAKU</span>
         </a>
 
         {/* Desktop nav */}
