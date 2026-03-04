@@ -31,7 +31,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="font-bold text-slate-800 group flex items-baseline gap-2">
-          <span className="text-3xl" style={{ fontFamily: "var(--font-brush)" }}>魄</span>
+          <img src="/haku-brush.png" alt="魄" className="h-8 w-auto" draggable={false} />
           <span className="text-sm tracking-[0.2em] text-aurora font-heading">HAKU</span>
         </a>
 

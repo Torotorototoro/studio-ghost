@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Logo */}
         <div className="font-bold flex items-baseline gap-2">
-          <span className="text-2xl text-slate-400" style={{ fontFamily: "var(--font-brush)" }}>魄</span>
+          <img src="/haku-brush.png" alt="魄" className="h-6 w-auto opacity-40" draggable={false} />
           <span className="text-sm tracking-[0.2em] text-aurora font-heading">HAKU</span>
         </div>
 

@@ -71,13 +71,14 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Main title */}
-        <h1
-          className="font-normal text-slate-800 mb-8"
-          style={{ fontFamily: "var(--font-brush)", fontSize: "clamp(6rem, 22vw, 16rem)", lineHeight: 0.85 }}
-        >
-          魄
-        </h1>
+        {/* Main title — brush calligraphy */}
+        <img
+          src="/haku-brush.png"
+          alt="魄"
+          className="mx-auto mb-8 select-none"
+          style={{ height: "clamp(8rem, 28vw, 18rem)", width: "auto" }}
+          draggable={false}
+        />
 
         {/* Subtitle */}
         <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
