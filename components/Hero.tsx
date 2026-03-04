@@ -73,16 +73,10 @@ export default function Hero() {
 
         {/* Main title */}
         <h1
-          className="font-normal text-slate-800 mb-3"
+          className="font-normal text-slate-800 mb-8"
           style={{ fontFamily: "var(--font-brush)", fontSize: "clamp(6rem, 22vw, 16rem)", lineHeight: 0.85 }}
         >
           魄
-        </h1>
-        <h1
-          className="font-heading font-medium tracking-[0.3em] text-aurora mb-8"
-          style={{ fontSize: "clamp(1.2rem, 3vw, 2.2rem)", lineHeight: 1 }}
-        >
-          HAKU
         </h1>
 
         {/* Subtitle */}
