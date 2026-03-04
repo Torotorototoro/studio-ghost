@@ -2,15 +2,15 @@
 
 /* ========================================
    魄 HAKU — Design System
-   Theme: "朱墨 Shu-Sumi" — Power & Tradition
+   Theme: "朱墨 Shu-Sumi" — Dark Cinematic
    ======================================== */
 
 :root {
-  /* Core palette — light / glass */
-  --sg-void: #f8fafc;
-  --sg-abyss: #f1f5f9;
-  --sg-deep: #e2e8f0;
-  --sg-surface: #cbd5e1;
+  /* Core palette — dark / cinematic */
+  --sg-void: #0a0a0b;
+  --sg-abyss: #111113;
+  --sg-deep: #1a1a1e;
+  --sg-surface: #2a2a30;
 
   /* Accents — 朱×墨 */
   --sg-cyan: #c0392b;
@@ -22,15 +22,15 @@
   --sg-purple-dim: rgba(127, 29, 29, 0.08);
   --sg-ghost-dim: rgba(254, 202, 202, 0.10);
 
-  /* Glass morphism — white glass */
-  --sg-glass: rgba(255, 255, 255, 0.55);
-  --sg-glass-border: rgba(148, 163, 184, 0.18);
-  --sg-glass-hover: rgba(192, 57, 43, 0.06);
+  /* Glass morphism — dark glass */
+  --sg-glass: rgba(10, 10, 11, 0.45);
+  --sg-glass-border: rgba(255, 255, 255, 0.08);
+  --sg-glass-hover: rgba(192, 57, 43, 0.10);
 
-  /* Text — dark on light */
-  --sg-text: #0f172a;
-  --sg-text-soft: #475569;
-  --sg-text-muted: #94a3b8;
+  /* Text — light on dark */
+  --sg-text: #f1f5f9;
+  --sg-text-soft: #cbd5e1;
+  --sg-text-muted: #64748b;
 
   /* Easing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -80,11 +80,11 @@ body {
    ======================================== */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--sg-abyss); }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+::-webkit-scrollbar-thumb { background: #2a2a30; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
 /* ========================================
-   #7 — Glass Morphism (Light)
+   Glass Morphism (Dark)
    ======================================== */
 .glass-card {
   background: var(--sg-glass);
@@ -123,9 +123,9 @@ body {
   transform: translateY(-6px);
   border-color: rgba(192, 57, 43, 0.25);
   box-shadow:
-    0 24px 80px -12px rgba(0, 0, 0, 0.08),
-    0 0 60px -20px rgba(192, 57, 43, 0.12),
-    0 0 100px -40px rgba(127, 29, 29, 0.06);
+    0 24px 80px -12px rgba(0, 0, 0, 0.4),
+    0 0 60px -20px rgba(192, 57, 43, 0.15),
+    0 0 100px -40px rgba(127, 29, 29, 0.10);
 }
 
 .glass-card:hover::before {
@@ -133,7 +133,7 @@ body {
 }
 
 /* ========================================
-   Glow Utilities (softened for light theme)
+   Glow Utilities
    ======================================== */
 .glow-cyan {
   text-shadow:
@@ -246,18 +246,18 @@ body {
   border-color: rgba(192, 57, 43, 0.3);
   background: var(--sg-glass-hover);
   transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(192, 57, 43, 0.08);
+  box-shadow: 0 0 30px rgba(192, 57, 43, 0.12);
 }
 
 /* ========================================
-   Input — Light Glass Style
+   Input — Dark Glass Style
    ======================================== */
 .input-abyss {
   width: 100%;
   padding: 14px 18px;
   font-size: 0.9375rem;
   color: var(--sg-text);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(10, 10, 11, 0.6);
   backdrop-filter: blur(8px);
   border: 1px solid var(--sg-glass-border);
   border-radius: 12px;
@@ -271,26 +271,14 @@ body {
 
 .input-abyss:focus {
   border-color: rgba(192, 57, 43, 0.4);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(10, 10, 11, 0.8);
   box-shadow:
-    0 0 0 4px rgba(192, 57, 43, 0.06),
-    0 0 30px rgba(192, 57, 43, 0.06);
+    0 0 0 4px rgba(192, 57, 43, 0.08),
+    0 0 30px rgba(192, 57, 43, 0.08);
 }
 
 /* ========================================
-   Morph Blob Background
-   ======================================== */
-.morph-blob {
-  position: absolute;
-  filter: blur(100px);
-  opacity: 0.10;
-  animation: morph-blob 20s ease-in-out infinite;
-  pointer-events: none;
-  will-change: border-radius;
-}
-
-/* ========================================
-   Noise Overlay — Film Grain (light)
+   Noise Overlay — Film Grain (dark / cinema)
    ======================================== */
 .noise-overlay {
   position: fixed;
@@ -298,59 +286,14 @@ body {
   z-index: 9999;
   pointer-events: none;
   opacity: 0.03;
-  mix-blend-mode: multiply;
+  mix-blend-mode: screen;
 }
 
 /* ========================================
-   #5 — Liquid Lens Distortion
-   ======================================== */
-.liquid-lens {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(192, 57, 43, 0.04) 0%,
-    rgba(127, 29, 29, 0.02) 40%,
-    transparent 70%
-  );
-  backdrop-filter: blur(1px) saturate(1.1);
-  -webkit-backdrop-filter: blur(1px) saturate(1.1);
-  pointer-events: none;
-  will-change: transform, border-radius;
-}
-
-.liquid-lens--a {
-  animation:
-    liquid-lens-drift 14s ease-in-out infinite alternate,
-    liquid-lens-morph 9s ease-in-out infinite;
-}
-
-.liquid-lens--b {
-  animation:
-    liquid-lens-drift 18s ease-in-out infinite alternate-reverse,
-    liquid-lens-morph 11s ease-in-out infinite reverse;
-}
-
-@keyframes liquid-lens-drift {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(30px, -20px) scale(1.05); }
-  66%  { transform: translate(-20px, 15px) scale(0.95); }
-  100% { transform: translate(10px, -10px) scale(1.02); }
-}
-
-@keyframes liquid-lens-morph {
-  0%   { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
-  25%  { border-radius: 60% 40% 30% 70% / 40% 60% 50% 50%; }
-  50%  { border-radius: 30% 70% 50% 50% / 70% 30% 40% 60%; }
-  75%  { border-radius: 50% 50% 40% 60% / 30% 70% 60% 40%; }
-  100% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
-}
-
-/* ========================================
-   Section heading legibility over light bg
+   Section heading legibility over dark photo bg
    ======================================== */
 section h2 {
-  text-shadow: 0 2px 20px rgba(248, 250, 252, 0.6), 0 0 40px rgba(248, 250, 252, 0.3);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
@@ -380,16 +323,6 @@ section h2 {
   50%      { opacity: 0.7; transform: scale(1.02); }
 }
 
-@keyframes morph-blob {
-  0%   { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
-  17%  { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
-  33%  { border-radius: 30% 70% 50% 50% / 40% 50% 60% 50%; }
-  50%  { border-radius: 50% 50% 40% 60% / 70% 30% 60% 40%; }
-  67%  { border-radius: 40% 60% 70% 30% / 50% 60% 30% 70%; }
-  83%  { border-radius: 70% 30% 50% 50% / 30% 70% 50% 50%; }
-  100% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
-}
-
 @keyframes float-gentle {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50%      { transform: translateY(-12px) rotate(0.5deg); }
@@ -406,17 +339,4 @@ section h2 {
 @keyframes bounce-slow {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(6px); }
-}
-
-/* ========================================
-   #4 — Ghost Stream (kinetic typography)
-   ======================================== */
-@keyframes stream-left {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@keyframes stream-right {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
 }

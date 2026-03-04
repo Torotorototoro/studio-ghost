@@ -23,15 +23,15 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[rgba(255,255,255,0.75)] backdrop-blur-xl border-b border-slate-200/60"
+          ? "bg-[rgba(10,10,11,0.75)] backdrop-blur-xl border-b border-white/10"
           : "bg-transparent"
       }`}
       style={{ transitionTimingFunction: "var(--ease-out-expo)" }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="font-bold text-slate-800 group flex items-baseline gap-2">
-          <img src="/haku-brush.png" alt="魄" className="h-8 w-auto" draggable={false} />
+        <a href="#" className="font-bold text-white group flex items-baseline gap-2">
+          <img src="/haku-brush.png" alt="魄" className="h-8 w-auto invert" draggable={false} />
           <span className="text-sm tracking-[0.2em] text-aurora font-heading">HAKU</span>
         </a>
 
@@ -56,17 +56,17 @@ export default function Navigation() {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-6 h-0.5 bg-slate-500 transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-white/60 transition-all duration-300 ${
               menuOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
           <span
-            className={`block w-6 h-0.5 bg-slate-500 transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-white/60 transition-all duration-300 ${
               menuOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block w-6 h-0.5 bg-slate-500 transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-white/60 transition-all duration-300 ${
               menuOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />
@@ -79,12 +79,12 @@ export default function Navigation() {
           menuOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         }`}
         style={{
-          background: "rgba(255,255,255,0.9)",
+          background: "rgba(10,10,11,0.9)",
           backdropFilter: "blur(20px)",
           transitionTimingFunction: "var(--ease-out-expo)",
         }}
       >
-        <div className="px-6 pb-6 pt-2 border-t border-slate-200/40">
+        <div className="px-6 pb-6 pt-2 border-t border-white/10">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}

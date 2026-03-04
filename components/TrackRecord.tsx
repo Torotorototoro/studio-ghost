@@ -1,6 +1,7 @@
 "use client";
 
 import { useSectionReveal } from "./useSectionReveal";
+import SectionBackground from "./SectionBackground";
 
 const TESTIMONIALS = [
   {
@@ -36,16 +37,18 @@ export default function TrackRecord() {
       className="relative py-32 sm:py-40 px-6 section-reveal"
       style={style}
     >
+      <SectionBackground src="/photos/results.jpg" />
+
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section label */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/40">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-black/30">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan" style={{ animation: "breathe 3s ease-in-out infinite" }} />
             <span className="text-[10px] tracking-[0.2em] text-slate-400 uppercase">Results</span>
           </div>
         </div>
 
-        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-800 mb-4 text-center">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4 text-center">
           RESULTS
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-cyan to-purple mx-auto mb-16" />
@@ -62,11 +65,11 @@ export default function TrackRecord() {
               }`}>
                 &ldquo;
               </span>
-              <p className="text-slate-500 text-sm leading-relaxed flex-1 mb-6">
+              <p className="text-slate-300 text-sm leading-relaxed flex-1 mb-6">
                 {t.quote}
               </p>
-              <div className="border-t border-slate-200/60 pt-4">
-                <p className="text-slate-700 text-sm font-semibold">{t.name}</p>
+              <div className="border-t border-white/10 pt-4">
+                <p className="text-white text-sm font-semibold">{t.name}</p>
                 <p className="text-slate-400 text-xs">{t.role}</p>
               </div>
             </div>

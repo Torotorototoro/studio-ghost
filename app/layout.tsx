@@ -45,38 +45,11 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        {/* Keyframes that Tailwind v4 purges from globals.css — embedded here to bypass processing */}
+        {/* backdrop-filter purged by Tailwind v4 — embedded here */}
         <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes stream-left {
-            from { transform: translateX(0); }
-            to   { transform: translateX(-50%); }
-          }
-          @keyframes stream-right {
-            from { transform: translateX(-50%); }
-            to   { transform: translateX(0); }
-          }
-          @keyframes liquid-lens-drift {
-            0%   { transform: translate(0, 0) scale(1); }
-            33%  { transform: translate(30px, -20px) scale(1.05); }
-            66%  { transform: translate(-20px, 15px) scale(0.95); }
-            100% { transform: translate(10px, -10px) scale(1.02); }
-          }
-          @keyframes liquid-lens-morph {
-            0%   { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
-            25%  { border-radius: 60% 40% 30% 70% / 40% 60% 50% 50%; }
-            50%  { border-radius: 30% 70% 50% 50% / 70% 30% 40% 60%; }
-            75%  { border-radius: 50% 50% 40% 60% / 30% 70% 60% 40%; }
-            100% { border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
-          }
-
-          /* backdrop-filter also purged by Tailwind v4 */
           .glass-card {
             -webkit-backdrop-filter: blur(16px) saturate(1.3);
             backdrop-filter: blur(16px) saturate(1.3);
-          }
-          .liquid-lens {
-            -webkit-backdrop-filter: blur(1px) saturate(1.1);
-            backdrop-filter: blur(1px) saturate(1.1);
           }
         `}} />
       </head>

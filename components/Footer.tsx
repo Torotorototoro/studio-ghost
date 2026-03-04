@@ -1,20 +1,20 @@
 export default function Footer() {
   return (
-    <footer className="relative border-t border-slate-200/60 py-12 px-6">
+    <footer className="relative border-t border-white/10 py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Logo */}
         <div className="font-bold flex items-baseline gap-2">
-          <img src="/haku-brush.png" alt="魄" className="h-6 w-auto opacity-40" draggable={false} />
+          <img src="/haku-brush.png" alt="魄" className="h-6 w-auto opacity-40 invert" draggable={false} />
           <span className="text-sm tracking-[0.2em] text-aurora font-heading">HAKU</span>
         </div>
 
         {/* Links */}
-        <div className="flex items-center gap-6 text-xs tracking-wider text-slate-300">
-          <a href="#" className="hover:text-slate-500 transition-colors duration-300">
+        <div className="flex items-center gap-6 text-xs tracking-wider text-slate-500">
+          <a href="#" className="hover:text-slate-300 transition-colors duration-300">
             Privacy Policy
           </a>
-          <span className="text-slate-200">|</span>
-          <a href="#" className="hover:text-slate-500 transition-colors duration-300">
+          <span className="text-slate-600">|</span>
+          <a href="#" className="hover:text-slate-300 transition-colors duration-300">
             Terms
           </a>
         </div>
@@ -46,7 +46,7 @@ export default function Footer() {
             <a
               key={item.label}
               href="#"
-              className="text-slate-300 hover:text-cyan transition-colors duration-300"
+              className="text-slate-500 hover:text-cyan transition-colors duration-300"
               aria-label={item.label}
             >
               {item.fill ? (
@@ -64,7 +64,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="text-center mt-8 text-[10px] tracking-wider text-slate-300">
+      <div className="text-center mt-8 text-[10px] tracking-wider text-slate-500">
         &copy; {new Date().getFullYear()} 魄 HAKU. All rights reserved.
       </div>
     </footer>

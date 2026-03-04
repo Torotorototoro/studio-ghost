@@ -1,6 +1,7 @@
 "use client";
 
 import { useSectionReveal } from "./useSectionReveal";
+import SectionBackground from "./SectionBackground";
 
 const PHASES = [
   {
@@ -54,14 +55,16 @@ export default function Services() {
       className="relative py-32 sm:py-40 px-6 section-reveal"
       style={style}
     >
+      <SectionBackground src="/photos/services.jpg" />
+
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Section label */}
-        <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-slate-200 bg-white/40">
+        <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-white/10 bg-black/30">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan" style={{ animation: "breathe 3s ease-in-out infinite" }} />
           <span className="text-[10px] tracking-[0.2em] text-slate-400 uppercase">What we do</span>
         </div>
 
-        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-800 mb-4">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4">
           SERVICES
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mb-6" />
@@ -79,8 +82,8 @@ export default function Services() {
               <div
                 className={`mb-6 p-3 inline-flex rounded-xl ${
                   phase.accent === "cyan"
-                    ? "bg-[rgba(192,57,43,0.08)] text-cyan"
-                    : "bg-[rgba(127,29,29,0.08)] text-purple"
+                    ? "bg-[rgba(192,57,43,0.15)] text-cyan"
+                    : "bg-[rgba(127,29,29,0.15)] text-purple"
                 }`}
               >
                 {phase.icon}
@@ -93,7 +96,7 @@ export default function Services() {
                 {phase.phase}
               </div>
 
-              <h3 className="font-heading text-lg font-bold text-slate-800 mb-1">
+              <h3 className="font-heading text-lg font-bold text-white mb-1">
                 {phase.title}
               </h3>
               <p className="text-slate-400 text-sm mb-5">
@@ -102,7 +105,7 @@ export default function Services() {
 
               <ul className="space-y-2">
                 {phase.items.map((item, j) => (
-                  <li key={j} className="flex items-start gap-2 text-slate-500 text-sm leading-relaxed">
+                  <li key={j} className="flex items-start gap-2 text-slate-300 text-sm leading-relaxed">
                     <span className={`mt-1.5 w-1 h-1 rounded-full shrink-0 ${
                       phase.accent === "cyan" ? "bg-cyan/60" : "bg-purple/60"
                     }`} />

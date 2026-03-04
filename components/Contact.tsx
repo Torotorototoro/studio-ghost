@@ -1,6 +1,7 @@
 "use client";
 
 import { useSectionReveal } from "./useSectionReveal";
+import SectionBackground from "./SectionBackground";
 
 export default function Contact() {
   const { ref, style } = useSectionReveal(0.15);
@@ -12,16 +13,18 @@ export default function Contact() {
       className="relative py-32 sm:py-40 px-6 section-reveal"
       style={style}
     >
+      <SectionBackground src="/photos/contact.jpg" />
+
       <div className="relative z-10 max-w-2xl mx-auto">
         {/* Section label */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/40">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-black/30">
             <span className="w-1.5 h-1.5 rounded-full bg-purple" style={{ animation: "breathe 3s ease-in-out infinite" }} />
             <span className="text-[10px] tracking-[0.2em] text-slate-400 uppercase">Get in touch</span>
           </div>
         </div>
 
-        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-800 mb-4 text-center">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4 text-center">
           CONTACT
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mx-auto mb-6" />
