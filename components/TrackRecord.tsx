@@ -5,7 +5,7 @@ import { useSectionReveal } from "./useSectionReveal";
 const TESTIMONIALS = [
   {
     quote:
-      "STUDIO GHOSTに任せてから、自分はコンテンツ制作だけに集中できるようになった。事業の立ち上げからグッズ展開、データ分析まで全部一気通貫でやってくれる。スピード感が全然違う。",
+      "魄（HAKU）に任せてから、自分はコンテンツ制作だけに集中できるようになった。事業の立ち上げからグッズ展開、データ分析まで全部一気通貫でやってくれる。スピード感が全然違う。",
     name: "ホモサピ",
     role: "YouTuber / Content Creator",
     accent: "cyan" as const,

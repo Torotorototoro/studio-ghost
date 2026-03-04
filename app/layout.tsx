@@ -26,9 +26,9 @@ const zenKaku = Zen_Kaku_Gothic_New({
 });
 
 export const metadata: Metadata = {
-  title: "STUDIO GHOST | インフルエンサー・クリエイター特化の事業コンサルティング",
+  title: "魄 HAKU | インフルエンサー・クリエイター特化の事業コンサルティング",
   description:
-    "著名人・インフルエンサーの裏側で、見えない力として事業を動かす。STUDIO GHOSTは、クリエイターに特化した事業コンサルティング会社です。",
+    "著名人・インフルエンサーの裏側で、見えない力として事業を動かす。魄（HAKU）は、クリエイターに特化した事業コンサルティング会社です。",
 };
 
 export default function RootLayout({

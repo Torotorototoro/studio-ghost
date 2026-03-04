@@ -7,14 +7,14 @@
  */
 
 const WORDS = [
-  "STRATEGY", "BRANDING", "INFLUENCE", "CREATOR", "GHOST",
-  "PRODUCTION", "DX", "REVENUE", "VISION", "INVISIBLE",
+  "STRATEGY", "BRANDING", "INFLUENCE", "CREATOR", "魄",
+  "PRODUCTION", "DX", "REVENUE", "VISION", "HAKU",
   "CONTENT", "SCALE", "ENGAGE", "MONETIZE", "PLATFORM",
-  "PHANTOM", "DIGITAL", "PRESENCE", "GROWTH", "IMPACT",
+  "SPIRIT", "DIGITAL", "PRESENCE", "GROWTH", "IMPACT",
   "データ分析", "事業戦略", "プロデュース", "ブランディング", "マネタイズ",
   "インフルエンサー", "クリエイター", "コンテンツ", "エンゲージメント", "スケール",
   "EC", "SNS", "YouTube", "TikTok", "Instagram",
-  "STUDIO", "GHOST", "FORCE", "CREATIVE", "INNOVATION",
+  "魄", "HAKU", "FORCE", "CREATIVE", "INNOVATION",
 ];
 
 // Deterministic hash for stable styling per word

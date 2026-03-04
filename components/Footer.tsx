@@ -3,9 +3,9 @@ export default function Footer() {
     <footer className="relative border-t border-slate-200/60 py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Logo */}
-        <div className="text-lg font-bold tracking-widest">
-          <span className="text-slate-400">STUDIO</span>
-          <span className="text-aurora ml-1">GHOST</span>
+        <div className="font-bold flex items-baseline gap-2">
+          <span className="text-xl text-slate-400">魄</span>
+          <span className="text-sm tracking-[0.2em] text-aurora">HAKU</span>
         </div>
 
         {/* Links */}
@@ -65,7 +65,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="text-center mt-8 text-[10px] tracking-wider text-slate-300">
-        &copy; {new Date().getFullYear()} STUDIO GHOST. All rights reserved.
+        &copy; {new Date().getFullYear()} 魄 HAKU. All rights reserved.
       </div>
     </footer>
   );

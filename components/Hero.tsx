@@ -71,18 +71,18 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Main title — Outfit font */}
+        {/* Main title */}
         <h1
-          className="font-heading font-black tracking-tighter text-slate-800 mb-2"
-          style={{ fontSize: "clamp(3.5rem, 12vw, 9rem)", lineHeight: 0.9 }}
+          className="font-black text-slate-800 mb-3"
+          style={{ fontSize: "clamp(5rem, 18vw, 14rem)", lineHeight: 0.85 }}
         >
-          STUDIO
+          魄
         </h1>
         <h1
-          className="font-heading font-black tracking-tighter text-aurora mb-8"
-          style={{ fontSize: "clamp(3.5rem, 12vw, 9rem)", lineHeight: 0.9 }}
+          className="font-heading font-black tracking-[0.3em] text-aurora mb-8"
+          style={{ fontSize: "clamp(1.5rem, 4vw, 3rem)", lineHeight: 1 }}
         >
-          GHOST
+          HAKU
         </h1>
 
         {/* Subtitle */}
