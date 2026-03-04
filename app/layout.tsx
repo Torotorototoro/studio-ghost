@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Outfit, Zen_Kaku_Gothic_New } from "next/font/google";
+import { Outfit, Zen_Kaku_Gothic_New, Yuji_Boku } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,6 +17,12 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["400", "600", "700", "800", "900"],
+});
+
+const yujiBoku = Yuji_Boku({
+  variable: "--font-brush",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const zenKaku = Zen_Kaku_Gothic_New({
@@ -75,7 +81,7 @@ export default function RootLayout({
         `}} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${zenKaku.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${zenKaku.variable} ${yujiBoku.variable} antialiased`}
         style={{ fontFamily: "var(--font-zen), var(--font-geist-sans), system-ui, sans-serif" }}
       >
         {children}

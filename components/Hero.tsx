@@ -73,8 +73,8 @@ export default function Hero() {
 
         {/* Main title */}
         <h1
-          className="font-black text-slate-800 mb-3"
-          style={{ fontSize: "clamp(5rem, 18vw, 14rem)", lineHeight: 0.85 }}
+          className="font-normal text-slate-800 mb-3"
+          style={{ fontFamily: "var(--font-brush)", fontSize: "clamp(6rem, 22vw, 16rem)", lineHeight: 0.85 }}
         >
           魄
         </h1>
