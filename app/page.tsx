@@ -11,7 +11,7 @@ import FluidCanvas from "@/components/FluidCanvas";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-void">
+    <div className="relative min-h-screen bg-void overflow-x-clip">
       {/* Global fixed backgrounds */}
       <FluidCanvas />
       <Navigation />

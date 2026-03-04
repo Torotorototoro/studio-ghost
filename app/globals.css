@@ -54,12 +54,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background: var(--sg-void);
   color: var(--sg-text);
   overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
 /* ========================================
