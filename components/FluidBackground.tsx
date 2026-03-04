@@ -120,8 +120,8 @@ export default function FluidBackground() {
     let animationId: number;
     let time = 0;
 
-    // Water / sky palette — pastel blues and soft indigo
-    const HUES = [195, 200, 205, 210, 215, 220, 230, 235];
+    // 朱×墨 palette — warm vermillion and crimson
+    const HUES = [0, 3, 6, 10, 15, 350, 355, 358];
 
     const PARTICLE_COUNT = Math.min(600, Math.floor((width * height) / 2500));
     const particles: Particle[] = [];
@@ -146,7 +146,7 @@ export default function FluidBackground() {
     // Trail fade: white-based for light theme
     function fadeTrails() {
       if (!ctx) return;
-      ctx.fillStyle = "rgba(248, 250, 252, 0.04)";
+      ctx.fillStyle = "rgba(248, 250, 252, 0.05)";
       ctx.fillRect(0, 0, width, height);
     }
 

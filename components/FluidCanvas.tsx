@@ -111,12 +111,12 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
   let cn = curl(uv * 6.0, u.time * 0.8) * 45.0;
   nv += cn * 0.012;
 
-  /* 3. Noise dye injection — pastel water hues, lower saturation, higher value */
+  /* 3. Noise dye injection — warm vermillion/crimson hues */
   let n = fbm(uv * 4.0 + u.time * 0.15, u.time);
   if (n > 0.55) {
     let s = (n - 0.55) * 4.0;
-    let hu = 0.53 + fract(u.time * 0.04 + uv.x * 0.2 + uv.y * 0.15) * 0.14;
-    nd += vec4f(hsv2rgb(hu, 0.35, 0.92) * s * 0.08, s * 0.02);
+    let hu = fract(0.98 + fract(u.time * 0.04 + uv.x * 0.2 + uv.y * 0.15) * 0.08);
+    nd += vec4f(hsv2rgb(hu, 0.45, 0.85) * s * 0.08, s * 0.02);
   }
 
   /* 4. Mouse interaction */
@@ -127,11 +127,11 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
   if (mD < mR && length(md) > 0.2) {
     let s = exp(-mD * mD / (mR * mR * 0.15));
     nv += md * s * 0.8;
-    let hu = 0.55 + fract(u.time * 0.08 + mD / mR * 0.2) * 0.12;
-    nd += vec4f(hsv2rgb(hu, 0.40, 0.95) * s * 3.0, s * 1.5);
+    let hu = fract(0.0 + fract(u.time * 0.08 + mD / mR * 0.2) * 0.06);
+    nd += vec4f(hsv2rgb(hu, 0.50, 0.90) * s * 3.0, s * 1.5);
   }
 
-  /* 5. Twelve orbiting vortices (water palette) */
+  /* 5. Twelve orbiting vortices (vermillion palette) */
   for (var j = 0u; j < 12u; j++) {
     let a = f32(j) * 0.524 + u.time * (0.15 + f32(j) * 0.035);
     let r = res.x * (0.06 + f32(j) * 0.05);
@@ -142,8 +142,8 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
       let s = exp(-d * d / (sr * sr * 0.2)) * 0.2;
       let fa = a + 1.5708;
       nv += vec2f(cos(fa), sin(fa)) * s * 90.0;
-      let hu = 0.53 + fract(f32(j) / 12.0 + u.time * 0.03) * 0.14;
-      nd += vec4f(hsv2rgb(hu, 0.35, 0.95) * s * 2.5, s * 0.8);
+      let hu = fract(0.97 + fract(f32(j) / 12.0 + u.time * 0.03) * 0.08);
+      nd += vec4f(hsv2rgb(hu, 0.45, 0.90) * s * 2.5, s * 0.8);
     }
   }
 
@@ -160,8 +160,8 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
         let bs = exp(-bd * bd / (br * br * 0.3)) * (burst - 0.7) * 3.0;
         let ba = u.time * 2.0 + f32(k) * 1.047;
         nv += vec2f(cos(ba), sin(ba)) * bs * 60.0;
-        let hu = 0.55 + fract(f32(k) / 3.0 + u.time * 0.05) * 0.12;
-        nd += vec4f(hsv2rgb(hu, 0.35, 0.95) * bs * 2.0, bs);
+        let hu = fract(0.99 + fract(f32(k) / 3.0 + u.time * 0.05) * 0.06);
+        nd += vec4f(hsv2rgb(hu, 0.45, 0.90) * bs * 2.0, bs);
       }
     }
   }

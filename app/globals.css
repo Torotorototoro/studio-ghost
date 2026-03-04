@@ -2,7 +2,7 @@
 
 /* ========================================
    魄 HAKU — Design System
-   Theme: "Aqua Glass" — Clarity & Trust
+   Theme: "朱墨 Shu-Sumi" — Power & Tradition
    ======================================== */
 
 :root {
@@ -12,20 +12,20 @@
   --sg-deep: #e2e8f0;
   --sg-surface: #cbd5e1;
 
-  /* Accents */
-  --sg-cyan: #0ea5e9;
-  --sg-purple: #6366f1;
-  --sg-ghost: #c7d2fe;
+  /* Accents — 朱×墨 */
+  --sg-cyan: #c0392b;
+  --sg-purple: #7f1d1d;
+  --sg-ghost: #fecaca;
 
   /* Dimmed variants */
-  --sg-cyan-dim: rgba(14, 165, 233, 0.10);
-  --sg-purple-dim: rgba(99, 102, 241, 0.08);
-  --sg-ghost-dim: rgba(199, 210, 254, 0.10);
+  --sg-cyan-dim: rgba(192, 57, 43, 0.10);
+  --sg-purple-dim: rgba(127, 29, 29, 0.08);
+  --sg-ghost-dim: rgba(254, 202, 202, 0.10);
 
   /* Glass morphism — white glass */
   --sg-glass: rgba(255, 255, 255, 0.55);
   --sg-glass-border: rgba(148, 163, 184, 0.18);
-  --sg-glass-hover: rgba(14, 165, 233, 0.06);
+  --sg-glass-hover: rgba(192, 57, 43, 0.06);
 
   /* Text — dark on light */
   --sg-text: #0f172a;
@@ -105,11 +105,11 @@ body {
   padding: 1.5px;
   background: linear-gradient(
     135deg,
-    rgba(14, 165, 233, 0.3),
-    rgba(14, 165, 233, 0.05) 30%,
+    rgba(192, 57, 43, 0.3),
+    rgba(192, 57, 43, 0.05) 30%,
     transparent 50%,
-    rgba(99, 102, 241, 0.05) 70%,
-    rgba(99, 102, 241, 0.3)
+    rgba(127, 29, 29, 0.05) 70%,
+    rgba(127, 29, 29, 0.3)
   );
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
@@ -121,11 +121,11 @@ body {
 
 .glass-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(14, 165, 233, 0.25);
+  border-color: rgba(192, 57, 43, 0.25);
   box-shadow:
     0 24px 80px -12px rgba(0, 0, 0, 0.08),
-    0 0 60px -20px rgba(14, 165, 233, 0.12),
-    0 0 100px -40px rgba(99, 102, 241, 0.06);
+    0 0 60px -20px rgba(192, 57, 43, 0.12),
+    0 0 100px -40px rgba(127, 29, 29, 0.06);
 }
 
 .glass-card:hover::before {
@@ -137,20 +137,20 @@ body {
    ======================================== */
 .glow-cyan {
   text-shadow:
-    0 0 20px rgba(14, 165, 233, 0.3),
-    0 0 60px rgba(14, 165, 233, 0.1);
+    0 0 20px rgba(192, 57, 43, 0.3),
+    0 0 60px rgba(192, 57, 43, 0.1);
 }
 
 .glow-purple {
   text-shadow:
-    0 0 20px rgba(99, 102, 241, 0.3),
-    0 0 60px rgba(99, 102, 241, 0.1);
+    0 0 20px rgba(127, 29, 29, 0.3),
+    0 0 60px rgba(127, 29, 29, 0.1);
 }
 
 .glow-ghost {
   text-shadow:
-    0 0 30px rgba(199, 210, 254, 0.3),
-    0 0 80px rgba(199, 210, 254, 0.1);
+    0 0 30px rgba(254, 202, 202, 0.3),
+    0 0 80px rgba(254, 202, 202, 0.1);
 }
 
 /* ========================================
@@ -162,7 +162,7 @@ body {
     var(--sg-cyan),
     var(--sg-purple),
     var(--sg-cyan),
-    #818cf8,
+    #e07a5f,
     var(--sg-cyan)
   );
   background-size: 400% 100%;
@@ -214,8 +214,8 @@ body {
 .btn-glow:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 8px 30px rgba(14, 165, 233, 0.25),
-    0 0 60px rgba(14, 165, 233, 0.1);
+    0 8px 30px rgba(192, 57, 43, 0.25),
+    0 0 60px rgba(192, 57, 43, 0.1);
 }
 
 .btn-glow:active {
@@ -243,10 +243,10 @@ body {
 
 .btn-glass:hover {
   color: var(--sg-cyan);
-  border-color: rgba(14, 165, 233, 0.3);
+  border-color: rgba(192, 57, 43, 0.3);
   background: var(--sg-glass-hover);
   transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(14, 165, 233, 0.08);
+  box-shadow: 0 0 30px rgba(192, 57, 43, 0.08);
 }
 
 /* ========================================
@@ -270,11 +270,11 @@ body {
 }
 
 .input-abyss:focus {
-  border-color: rgba(14, 165, 233, 0.4);
+  border-color: rgba(192, 57, 43, 0.4);
   background: rgba(255, 255, 255, 0.8);
   box-shadow:
-    0 0 0 4px rgba(14, 165, 233, 0.06),
-    0 0 30px rgba(14, 165, 233, 0.06);
+    0 0 0 4px rgba(192, 57, 43, 0.06),
+    0 0 30px rgba(192, 57, 43, 0.06);
 }
 
 /* ========================================
@@ -309,8 +309,8 @@ body {
   border-radius: 50%;
   background: radial-gradient(
     ellipse at center,
-    rgba(14, 165, 233, 0.04) 0%,
-    rgba(99, 102, 241, 0.02) 40%,
+    rgba(192, 57, 43, 0.04) 0%,
+    rgba(127, 29, 29, 0.02) 40%,
     transparent 70%
   );
   backdrop-filter: blur(1px) saturate(1.1);

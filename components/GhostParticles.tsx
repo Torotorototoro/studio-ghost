@@ -72,15 +72,15 @@ export default function GhostParticles() {
           particles[i].y = height + 10;
         }
 
-        // Draw particle with soft water-blue glow
+        // Draw particle with soft vermillion glow
         ctx.save();
         ctx.globalAlpha = Math.max(0, p.opacity);
         ctx.shadowBlur = 15;
-        ctx.shadowColor = "rgba(14, 165, 233, 0.4)";
+        ctx.shadowColor = "rgba(192, 57, 43, 0.4)";
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(14, 165, 233, ${p.opacity * 0.7})`;
+        ctx.fillStyle = `rgba(192, 57, 43, ${p.opacity * 0.7})`;
         ctx.fill();
         ctx.restore();
       }

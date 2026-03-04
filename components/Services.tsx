@@ -79,8 +79,8 @@ export default function Services() {
               <div
                 className={`mb-6 p-3 inline-flex rounded-xl ${
                   phase.accent === "cyan"
-                    ? "bg-[rgba(14,165,233,0.08)] text-cyan"
-                    : "bg-[rgba(99,102,241,0.08)] text-purple"
+                    ? "bg-[rgba(192,57,43,0.08)] text-cyan"
+                    : "bg-[rgba(127,29,29,0.08)] text-purple"
                 }`}
               >
                 {phase.icon}
