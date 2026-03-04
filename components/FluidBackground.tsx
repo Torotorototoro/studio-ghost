@@ -120,8 +120,8 @@ export default function FluidBackground() {
     let animationId: number;
     let time = 0;
 
-    // Ghost palette — cyan and purple hues
-    const HUES = [180, 185, 190, 195, 200, 260, 270, 280];
+    // Water / sky palette — pastel blues and soft indigo
+    const HUES = [195, 200, 205, 210, 215, 220, 230, 235];
 
     const PARTICLE_COUNT = Math.min(600, Math.floor((width * height) / 2500));
     const particles: Particle[] = [];
@@ -143,10 +143,10 @@ export default function FluidBackground() {
       particles.push(p);
     }
 
-    // Trail fade: 4% opacity per frame (like OJPP)
+    // Trail fade: white-based for light theme
     function fadeTrails() {
       if (!ctx) return;
-      ctx.fillStyle = "rgba(2, 6, 23, 0.04)";
+      ctx.fillStyle = "rgba(248, 250, 252, 0.04)";
       ctx.fillRect(0, 0, width, height);
     }
 
@@ -209,10 +209,10 @@ export default function FluidBackground() {
         } else {
           alpha = 1;
         }
-        alpha *= 0.55;
+        alpha *= 0.45;
 
-        const sat = 75 + Math.sin(p.life * 0.02) * 20;
-        const light = 55 + Math.sin(p.life * 0.03) * 15;
+        const sat = 50 + Math.sin(p.life * 0.02) * 15;
+        const light = 55 + Math.sin(p.life * 0.03) * 10;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, 1.1, 0, Math.PI * 2);
@@ -226,8 +226,8 @@ export default function FluidBackground() {
         const by = Math.random() * height;
         const hue = HUES[Math.floor(Math.random() * HUES.length)];
         const grad = ctx.createRadialGradient(bx, by, 0, bx, by, 50);
-        grad.addColorStop(0, `hsla(${hue}, 90%, 70%, 0.06)`);
-        grad.addColorStop(1, `hsla(${hue}, 90%, 70%, 0)`);
+        grad.addColorStop(0, `hsla(${hue}, 60%, 60%, 0.05)`);
+        grad.addColorStop(1, `hsla(${hue}, 60%, 60%, 0)`);
         ctx.beginPath();
         ctx.arc(bx, by, 50, 0, Math.PI * 2);
         ctx.fillStyle = grad;

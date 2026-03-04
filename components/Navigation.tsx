@@ -23,14 +23,14 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[rgba(2,6,23,0.8)] backdrop-blur-xl border-b border-white/[0.05]"
+          ? "bg-[rgba(255,255,255,0.75)] backdrop-blur-xl border-b border-slate-200/60"
           : "bg-transparent"
       }`}
       style={{ transitionTimingFunction: "var(--ease-out-expo)" }}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="text-xl font-bold tracking-widest text-white group">
+        <a href="#" className="text-xl font-bold tracking-widest text-slate-800 group">
           STUDIO
           <span className="text-aurora ml-1">GHOST</span>
         </a>
@@ -41,7 +41,7 @@ export default function Navigation() {
             <a
               key={item.href}
               href={item.href}
-              className="relative text-sm tracking-wider text-white/40 hover:text-cyan transition-colors duration-300 py-1"
+              className="relative text-sm tracking-wider text-slate-400 hover:text-cyan transition-colors duration-300 py-1"
             >
               {item.label}
               <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-cyan transition-all duration-300 group-hover:w-full" />
@@ -56,17 +56,17 @@ export default function Navigation() {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-6 h-0.5 bg-white/60 transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-slate-500 transition-all duration-300 ${
               menuOpen ? "rotate-45 translate-y-2" : ""
             }`}
           />
           <span
-            className={`block w-6 h-0.5 bg-white/60 transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-slate-500 transition-all duration-300 ${
               menuOpen ? "opacity-0" : ""
             }`}
           />
           <span
-            className={`block w-6 h-0.5 bg-white/60 transition-all duration-300 ${
+            className={`block w-6 h-0.5 bg-slate-500 transition-all duration-300 ${
               menuOpen ? "-rotate-45 -translate-y-2" : ""
             }`}
           />
@@ -79,18 +79,18 @@ export default function Navigation() {
           menuOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         }`}
         style={{
-          background: "rgba(2,6,23,0.95)",
+          background: "rgba(255,255,255,0.9)",
           backdropFilter: "blur(20px)",
           transitionTimingFunction: "var(--ease-out-expo)",
         }}
       >
-        <div className="px-6 pb-6 pt-2 border-t border-white/[0.05]">
+        <div className="px-6 pb-6 pt-2 border-t border-slate-200/40">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
               href={item.href}
               onClick={() => setMenuOpen(false)}
-              className="block py-3 text-sm tracking-wider text-white/40 hover:text-cyan transition-colors"
+              className="block py-3 text-sm tracking-wider text-slate-400 hover:text-cyan transition-colors"
             >
               {item.label}
             </a>

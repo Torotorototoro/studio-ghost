@@ -1,20 +1,20 @@
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.05] py-12 px-6">
+    <footer className="relative border-t border-slate-200/60 py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Logo */}
         <div className="text-lg font-bold tracking-widest">
-          <span className="text-white/40">STUDIO</span>
+          <span className="text-slate-400">STUDIO</span>
           <span className="text-aurora ml-1">GHOST</span>
         </div>
 
         {/* Links */}
-        <div className="flex items-center gap-6 text-xs tracking-wider text-white/20">
-          <a href="#" className="hover:text-white/50 transition-colors duration-300">
+        <div className="flex items-center gap-6 text-xs tracking-wider text-slate-300">
+          <a href="#" className="hover:text-slate-500 transition-colors duration-300">
             Privacy Policy
           </a>
-          <span className="text-white/[0.06]">|</span>
-          <a href="#" className="hover:text-white/50 transition-colors duration-300">
+          <span className="text-slate-200">|</span>
+          <a href="#" className="hover:text-slate-500 transition-colors duration-300">
             Terms
           </a>
         </div>
@@ -46,7 +46,7 @@ export default function Footer() {
             <a
               key={item.label}
               href="#"
-              className="text-white/20 hover:text-cyan transition-colors duration-300"
+              className="text-slate-300 hover:text-cyan transition-colors duration-300"
               aria-label={item.label}
             >
               {item.fill ? (
@@ -64,7 +64,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="text-center mt-8 text-[10px] tracking-wider text-white/10">
+      <div className="text-center mt-8 text-[10px] tracking-wider text-slate-300">
         &copy; {new Date().getFullYear()} STUDIO GHOST. All rights reserved.
       </div>
     </footer>

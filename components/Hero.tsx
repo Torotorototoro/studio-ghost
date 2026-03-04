@@ -33,12 +33,12 @@ export default function Hero() {
         />
       </div>
 
-      {/* Layer 2: Vignettes */}
+      {/* Layer 2: Vignettes — light theme */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
         <div
           className="absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 20%, rgba(2,6,23,0.85) 100%)",
+            background: "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 20%, rgba(248,250,252,0.85) 100%)",
           }}
         />
         <div
@@ -61,32 +61,32 @@ export default function Hero() {
         style={{ transform: `translateY(${scrollY * -0.1}px)` }}
       >
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-slate-200 bg-white/40 backdrop-blur-sm">
           <span
             className="w-2 h-2 rounded-full bg-cyan"
             style={{ animation: "breathe 3s ease-in-out infinite" }}
           />
-          <span className="text-xs tracking-widest text-white/60 uppercase font-heading">
+          <span className="text-xs tracking-widest text-slate-500 uppercase font-heading">
             AI-Powered Business Consulting
           </span>
         </div>
 
-        {/* Main title — Outfit font + glitch */}
+        {/* Main title — Outfit font */}
         <h1
-          className="font-heading font-black tracking-tighter text-white mb-2 glitch-chromatic"
+          className="font-heading font-black tracking-tighter text-slate-800 mb-2"
           style={{ fontSize: "clamp(3.5rem, 12vw, 9rem)", lineHeight: 0.9 }}
         >
           STUDIO
         </h1>
         <h1
-          className="font-heading font-black tracking-tighter text-aurora mb-8 glitch-text"
+          className="font-heading font-black tracking-tighter text-aurora mb-8"
           style={{ fontSize: "clamp(3.5rem, 12vw, 9rem)", lineHeight: 0.9 }}
         >
           GHOST
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl text-white/50 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
           ビジネスの立ち上げからスケールまで、一気通貫で。
         </p>
 
@@ -103,11 +103,11 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3">
-        <span className="text-[10px] tracking-widest text-white/20 uppercase font-heading">Scroll</span>
+        <span className="text-[10px] tracking-widest text-slate-300 uppercase font-heading">Scroll</span>
         <div
           className="w-[1px] h-10"
           style={{
-            background: "linear-gradient(to bottom, rgba(255,255,255,0.3), transparent)",
+            background: "linear-gradient(to bottom, rgba(15,23,42,0.3), transparent)",
             animation: "bounce-slow 2s ease-in-out infinite",
           }}
         />

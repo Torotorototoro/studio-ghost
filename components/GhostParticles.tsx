@@ -72,15 +72,15 @@ export default function GhostParticles() {
           particles[i].y = height + 10;
         }
 
-        // Draw ghost particle with glow
+        // Draw particle with soft water-blue glow
         ctx.save();
         ctx.globalAlpha = Math.max(0, p.opacity);
         ctx.shadowBlur = 15;
-        ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+        ctx.shadowColor = "rgba(14, 165, 233, 0.4)";
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+        ctx.fillStyle = `rgba(14, 165, 233, ${p.opacity * 0.7})`;
         ctx.fill();
         ctx.restore();
       }

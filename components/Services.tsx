@@ -56,16 +56,16 @@ export default function Services() {
     >
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Section label */}
-        <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.02]">
+        <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-slate-200 bg-white/40">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan" style={{ animation: "breathe 3s ease-in-out infinite" }} />
-          <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">What we do</span>
+          <span className="text-[10px] tracking-[0.2em] text-slate-400 uppercase">What we do</span>
         </div>
 
-        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-slate-800 mb-4">
           SERVICES
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-purple to-cyan mb-6" />
-        <p className="text-white/40 text-sm mb-16 max-w-2xl">
+        <p className="text-slate-400 text-sm mb-16 max-w-2xl">
           ゼロからスケールまで。3フェーズの一気通貫モデルで、ビジネスのあらゆるステージを支援します。
         </p>
 
@@ -74,17 +74,13 @@ export default function Services() {
             <div
               key={i}
               className="glass-card p-8 group"
-              style={{
-                animation: "pulse-glow 4s ease-in-out infinite",
-                animationDelay: `${i * 1.3}s`,
-              }}
             >
               {/* Icon */}
               <div
                 className={`mb-6 p-3 inline-flex rounded-xl ${
                   phase.accent === "cyan"
-                    ? "bg-[rgba(0,229,255,0.08)] text-cyan"
-                    : "bg-[rgba(180,74,255,0.08)] text-purple"
+                    ? "bg-[rgba(14,165,233,0.08)] text-cyan"
+                    : "bg-[rgba(99,102,241,0.08)] text-purple"
                 }`}
               >
                 {phase.icon}
@@ -97,16 +93,16 @@ export default function Services() {
                 {phase.phase}
               </div>
 
-              <h3 className="font-heading text-lg font-bold text-white tracking-wide mb-1">
+              <h3 className="font-heading text-lg font-bold text-slate-800 tracking-wide mb-1">
                 {phase.title}
               </h3>
-              <p className="text-white/40 text-sm mb-5">
+              <p className="text-slate-400 text-sm mb-5">
                 {phase.subtitle}
               </p>
 
               <ul className="space-y-2">
                 {phase.items.map((item, j) => (
-                  <li key={j} className="flex items-start gap-2 text-white/50 text-sm leading-relaxed">
+                  <li key={j} className="flex items-start gap-2 text-slate-500 text-sm leading-relaxed">
                     <span className={`mt-1.5 w-1 h-1 rounded-full shrink-0 ${
                       phase.accent === "cyan" ? "bg-cyan/60" : "bg-purple/60"
                     }`} />

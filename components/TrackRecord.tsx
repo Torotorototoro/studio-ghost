@@ -39,13 +39,13 @@ export default function TrackRecord() {
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Section label */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.02]">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-200 bg-white/40">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan" style={{ animation: "breathe 3s ease-in-out infinite" }} />
-            <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase">Results</span>
+            <span className="text-[10px] tracking-[0.2em] text-slate-400 uppercase">Results</span>
           </div>
         </div>
 
-        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white mb-4 text-center">
+        <h2 className="font-heading text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-slate-800 mb-4 text-center">
           RESULTS
         </h2>
         <div className="w-20 h-[2px] bg-gradient-to-r from-cyan to-purple mx-auto mb-16" />
@@ -55,10 +55,6 @@ export default function TrackRecord() {
             <div
               key={i}
               className="glass-card p-8 flex flex-col"
-              style={{
-                animation: "pulse-glow 4s ease-in-out infinite",
-                animationDelay: `${i * 1.3}s`,
-              }}
             >
               {/* Quote mark */}
               <span className={`text-3xl font-heading font-bold mb-4 ${
@@ -66,12 +62,12 @@ export default function TrackRecord() {
               }`}>
                 &ldquo;
               </span>
-              <p className="text-white/50 text-sm leading-relaxed flex-1 mb-6">
+              <p className="text-slate-500 text-sm leading-relaxed flex-1 mb-6">
                 {t.quote}
               </p>
-              <div className="border-t border-white/[0.06] pt-4">
-                <p className="text-white/80 text-sm font-semibold">{t.name}</p>
-                <p className="text-white/30 text-xs">{t.role}</p>
+              <div className="border-t border-slate-200/60 pt-4">
+                <p className="text-slate-700 text-sm font-semibold">{t.name}</p>
+                <p className="text-slate-400 text-xs">{t.role}</p>
               </div>
             </div>
           ))}

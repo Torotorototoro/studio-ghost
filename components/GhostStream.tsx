@@ -3,8 +3,7 @@
 /**
  * #4 — Ghost Stream: Kinetic Typography
  * Horizontal flowing text lanes with creator/business keywords.
- * Multiple sizes, fonts, opacities, occasional glitch effects.
- * Similar to OJPP's Opinion Stream but with ghost/creator theme.
+ * Multiple sizes, fonts, opacities.
  */
 
 const WORDS = [
@@ -48,10 +47,6 @@ const FONTS = [
   "font-mono", "",
 ];
 
-const GLITCH_CLASSES = ["", "", "", "", "", "", "", "", "",
-  "glitch-text", "glitch-chromatic", "glitch-scan",
-];
-
 const LANE_COUNT = 14;
 
 function buildLane(laneIndex: number): string[] {
@@ -68,14 +63,13 @@ function WordSpan({ word, laneIndex, wordIndex }: { word: string; laneIndex: num
   const size = SIZES[h % SIZES.length];
   const weight = WEIGHTS[(h >> 3) % WEIGHTS.length];
   const font = FONTS[(h >> 5) % FONTS.length];
-  const glitch = GLITCH_CLASSES[(h >> 7) % GLITCH_CLASSES.length];
 
-  // Color: mostly white/ghost, occasionally cyan or purple
+  // Color: mostly dark slate, occasionally cyan or purple
   const colorRoll = (h >> 9) % 10;
-  const color = colorRoll < 2 ? "text-cyan/40" : colorRoll < 3 ? "text-purple/40" : "text-white";
+  const color = colorRoll < 2 ? "text-cyan/40" : colorRoll < 3 ? "text-purple/40" : "text-slate-800";
 
   // Opacity variation
-  const opacities = [0.06, 0.08, 0.1, 0.12, 0.15, 0.18, 0.22, 0.28, 0.35];
+  const opacities = [0.04, 0.06, 0.08, 0.10, 0.12, 0.14, 0.16, 0.20, 0.25];
   const opacity = opacities[(h >> 11) % opacities.length];
 
   // Slight rotation
@@ -91,7 +85,7 @@ function WordSpan({ word, laneIndex, wordIndex }: { word: string; laneIndex: num
 
   return (
     <span
-      className={`inline-block mx-2 sm:mx-3 whitespace-nowrap select-none ${size} ${weight} ${font} ${glitch} ${color}`}
+      className={`inline-block mx-2 sm:mx-3 whitespace-nowrap select-none ${size} ${weight} ${font} ${color}`}
       style={{ opacity, transform: rotate, ...outlineStyle }}
     >
       {word}

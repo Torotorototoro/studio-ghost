@@ -111,12 +111,12 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
   let cn = curl(uv * 6.0, u.time * 0.8) * 45.0;
   nv += cn * 0.012;
 
-  /* 3. Noise dye injection */
+  /* 3. Noise dye injection — pastel water hues, lower saturation, higher value */
   let n = fbm(uv * 4.0 + u.time * 0.15, u.time);
   if (n > 0.55) {
     let s = (n - 0.55) * 4.0;
-    let hu = 0.5 + fract(u.time * 0.06 + uv.x * 0.3 + uv.y * 0.2) * 0.28;
-    nd += vec4f(hsv2rgb(hu, 0.85, 0.8) * s * 0.08, s * 0.02);
+    let hu = 0.53 + fract(u.time * 0.04 + uv.x * 0.2 + uv.y * 0.15) * 0.14;
+    nd += vec4f(hsv2rgb(hu, 0.35, 0.92) * s * 0.08, s * 0.02);
   }
 
   /* 4. Mouse interaction */
@@ -127,11 +127,11 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
   if (mD < mR && length(md) > 0.2) {
     let s = exp(-mD * mD / (mR * mR * 0.15));
     nv += md * s * 0.8;
-    let hu = 0.5 + fract(u.time * 0.12 + mD / mR * 0.3) * 0.12;
-    nd += vec4f(hsv2rgb(hu, 0.9, 1.0) * s * 3.0, s * 1.5);
+    let hu = 0.55 + fract(u.time * 0.08 + mD / mR * 0.2) * 0.12;
+    nd += vec4f(hsv2rgb(hu, 0.40, 0.95) * s * 3.0, s * 1.5);
   }
 
-  /* 5. Twelve orbiting vortices (ghost palette) */
+  /* 5. Twelve orbiting vortices (water palette) */
   for (var j = 0u; j < 12u; j++) {
     let a = f32(j) * 0.524 + u.time * (0.15 + f32(j) * 0.035);
     let r = res.x * (0.06 + f32(j) * 0.05);
@@ -142,8 +142,8 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
       let s = exp(-d * d / (sr * sr * 0.2)) * 0.2;
       let fa = a + 1.5708;
       nv += vec2f(cos(fa), sin(fa)) * s * 90.0;
-      let hu = 0.5 + fract(f32(j) / 12.0 + u.time * 0.05) * 0.28;
-      nd += vec4f(hsv2rgb(hu, 0.9, 1.0) * s * 2.5, s * 0.8);
+      let hu = 0.53 + fract(f32(j) / 12.0 + u.time * 0.03) * 0.14;
+      nd += vec4f(hsv2rgb(hu, 0.35, 0.95) * s * 2.5, s * 0.8);
     }
   }
 
@@ -160,8 +160,8 @@ fn main(@builtin(global_invocation_id) g: vec3u) {
         let bs = exp(-bd * bd / (br * br * 0.3)) * (burst - 0.7) * 3.0;
         let ba = u.time * 2.0 + f32(k) * 1.047;
         nv += vec2f(cos(ba), sin(ba)) * bs * 60.0;
-        let hu = 0.5 + fract(f32(k) / 3.0 + u.time * 0.08) * 0.28;
-        nd += vec4f(hsv2rgb(hu, 0.9, 1.0) * bs * 2.0, bs);
+        let hu = 0.55 + fract(f32(k) / 3.0 + u.time * 0.05) * 0.12;
+        nd += vec4f(hsv2rgb(hu, 0.35, 0.95) * bs * 2.0, bs);
       }
     }
   }
@@ -249,28 +249,21 @@ fn frag(in: VertexOutput) -> @location(0) vec4f {
   c += sampleBilinear(uv + vec2f(-tx, -ty)).rgb * 0.05;
   c += sampleBilinear(uv + vec2f(-tx,  ty)).rgb * 0.05;
 
-  /* 2. S-curve contrast */
-  c = c * 1.3;
+  /* 2. Softer contrast for light theme */
+  c = c * 1.1;
   c = c * c * (3.0 - 2.0 * c);
 
-  /* 3. Chromatic aberration (additive, bilinear) */
-  let ca = 1.5 / ru.width;
-  let cr = sampleBilinear(uv + vec2f(ca, 0.0)).r * 0.15;
-  let cb = sampleBilinear(uv - vec2f(ca, 0.0)).b * 0.15;
-  c.r += cr;
-  c.b += cb;
-
-  /* 4. Film grain */
-  let grain = (hashGrain(uv * 1000.0 + ru.time * 100.0) - 0.5) * 0.06;
+  /* 3. Film grain (subtle) */
+  let grain = (hashGrain(uv * 1000.0 + ru.time * 100.0) - 0.5) * 0.04;
   c += grain;
 
-  /* 5. Vignette */
+  /* 4. Soft vignette */
   let d = length(uv - 0.5);
-  let vig = smoothstep(0.85, 0.1, d);
+  let vig = smoothstep(0.9, 0.15, d);
 
-  /* 6. Alpha from luminance */
+  /* 5. Alpha from luminance */
   let lum = max(c.r, max(c.g, c.b));
-  return vec4f(c * vig, lum * 0.35);
+  return vec4f(c * vig, lum * 0.25);
 }
 `;
 
