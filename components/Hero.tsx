@@ -14,10 +14,10 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center"
+      className="relative min-h-screen flex items-center overflow-hidden"
       style={{ minHeight: "max(100vh, 700px)" }}
     >
-      {/* Layer 1: Morph blobs (hero-only decoration) */}
+      {/* Layer 1: Morph blobs */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
         <div
           className="morph-blob absolute bg-cyan"
@@ -27,20 +27,31 @@ export default function Hero() {
           className="morph-blob absolute bg-purple"
           style={{ width: 450, height: 450, bottom: "10%", right: "5%", animationDelay: "-7s" }}
         />
-        <div
-          className="morph-blob absolute bg-purple"
-          style={{ width: 300, height: 300, top: "45%", left: "55%", opacity: 0.06, animationDelay: "-14s" }}
+      </div>
+
+      {/* Layer 2: Giant background 魄 watermark */}
+      <div
+        className="absolute inset-0 pointer-events-none flex items-center justify-end"
+        style={{ zIndex: 2 }}
+      >
+        <img
+          src="/haku-brush.png"
+          alt=""
+          className="select-none"
+          style={{
+            height: "90vh",
+            width: "auto",
+            opacity: 0.07,
+            transform: `translateX(10%) translateY(${scrollY * -0.05}px)`,
+            maskImage: "radial-gradient(ellipse 80% 70% at 60% 50%, black 30%, transparent 80%)",
+            WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 60% 50%, black 30%, transparent 80%)",
+          }}
+          draggable={false}
         />
       </div>
 
-      {/* Layer 2: Vignettes — light theme */}
+      {/* Layer 3: Vignettes */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 20%, rgba(248,250,252,0.85) 100%)",
-          }}
-        />
         <div
           className="absolute bottom-0 left-0 w-full h-48"
           style={{
@@ -55,9 +66,9 @@ export default function Hero() {
         />
       </div>
 
-      {/* Layer 4: Content with parallax */}
+      {/* Layer 4: Content — left aligned */}
       <div
-        className="relative z-10 text-center px-6"
+        className="relative z-10 px-6 sm:px-12 md:px-20 max-w-7xl mx-auto w-full"
         style={{ transform: `translateY(${scrollY * -0.1}px)` }}
       >
         {/* Badge */}
@@ -71,22 +82,26 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Main title — brush calligraphy */}
+        {/* Logo mark */}
         <img
           src="/haku-brush.png"
           alt="魄"
-          className="mx-auto mb-8 select-none"
-          style={{ height: "clamp(8rem, 28vw, 18rem)", width: "auto" }}
+          className="mb-4 select-none"
+          style={{ height: "clamp(4rem, 10vw, 7rem)", width: "auto" }}
           draggable={false}
         />
 
-        {/* Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl text-slate-400 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
+        {/* Tagline */}
+        <p className="font-heading text-xl sm:text-2xl md:text-3xl text-slate-700 mb-2 tracking-wide leading-relaxed">
+          見えない力で、<br />
+          事業を動かす。
+        </p>
+        <p className="text-sm sm:text-base text-slate-400 mb-10 max-w-md font-light tracking-wide leading-relaxed">
           ビジネスの立ち上げからスケールまで、一気通貫で。
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-start gap-4">
           <a href="#contact" className="btn-glow">
             Contact Us
           </a>
